@@ -1,47 +1,34 @@
-#include <iostream>
-#include <string>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/03 21:52:36 by jpaul             #+#    #+#             */
+/*   Updated: 2025/01/03 21:52:36 by jpaul            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define CONTACT_SIZE 8
+#include "my_phonebook.hpp"
 
-class Contact
+void PhoneBook::add(const std::string& name, const std::string& phone_no)
 {
-    public:
-        std::string name;
-        std::string phone_number;
-    
-        Contact(std::string& n, std::string& p) 
-            : name(n), phone_number(p) {} 
+    if (current == CONTACT_MAX) 
+        current = 0; 
+    list[current].name = name;
+    list[current].phone_no = phone_no;
+    current++;
+}
 
-};
-
-
-class PhoneBook
+void PhoneBook::show()
 {
-    private:
-        int current;
-        Contact *list[8];
-
-    public:
-        PhoneBook() : current(0) {} 
-
-        void create_contact(const std::string& name, const std::string& phone_number)
-        {
-            if (current < 8) 
-                list[current++] = new Contact(name, phone_number); 
-            else 
-            {
-                // Handle case where phonebook is full 
-                // (e.g., replace oldest contact) 
-            }
-        }
-
-        ~PhoneBook()
-        {
-            int i;
-
-            i = -1;
-            while (++i < 8) {
-                delete list[i]; 
-        }
+    int i;
+    i = 0;
+    while (list[i].name != "" && list[i].phone_no != "") {
+        std::cout << list[i].name << " ---> ";
+        std::cout << list[i].phone_no << std::endl;
+        std::cout << "===============================" << std::endl;
+        i++;
     }
-};
+}

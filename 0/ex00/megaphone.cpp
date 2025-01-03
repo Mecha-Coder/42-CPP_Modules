@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/03 21:20:40 by jpaul             #+#    #+#             */
+/*   Updated: 2025/01/03 21:20:40 by jpaul            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream> // cin, cout, endl
 #include <string>  // concatenate (+ +=), comparison, finding substr, len
 #include <cctype>  // touppper(), isdigit()
