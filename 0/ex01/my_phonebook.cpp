@@ -16,30 +16,21 @@ int main()
 {
     PhoneBook my_contact;
 
-    std::cout << "\n1st Entry\n" <<  std::endl;
-
-    my_contact.add("Jason", "011-26671880");
-    my_contact.show();
+    std::cout << 
     
-    std::cout << "\n2nd Entry\n" <<  std::endl;
-
-    my_contact.add("Lul",     "+6012-345-6789");
-    my_contact.add("Alia",    "+6013-456-7890");
-    my_contact.add("Siti",    "+6014-567-8901");
-    my_contact.add("John",    "+6016-678-9012");
-    my_contact.add("Kenneth", "+6017-789-0123");
-    my_contact.add("Amirul",  "+6019-890-1234");
-    my_contact.add("Harry",   "+6012-901-2345");
-    my_contact.show();
-
-    std::cout << "\n3th Entry\n" <<  std::endl;
-
-    my_contact.add("Lyara", "+6014-123-4567");
-    my_contact.add("Adya",  "+6016-234-5678");
-    my_contact.show();
-    
-    std::cout << "\n4th Entry\n" <<  std::endl;
-
-    my_contact.add("Leon",    "+6013-012-3456");
-    my_contact.show();
 }
+
+/*
+"      WELCOME TO AWESOME PHONEBOOK APP      "
+"============================================"
+"* Can store max of 8 contacts (entry 0 - 7) "
+"* Type these commands in the prompt>        "
+
+"COMMAND |   ACTION
+"---------------------------------------------"
+"ADD     |   save new contact                 "
+"SEARCH  |   select a contact to be displayed "
+"EXIT    |   quit and all contact will be lost"
+
+prompt >
+*/

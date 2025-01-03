@@ -18,9 +18,19 @@
 class Contact 
 {
     public:
-        std::string name;
+        std::string f_name;
+        std::string l_name;
+        std::string nickname;
         std::string phone_no;
-        Contact() : name(""), phone_no("") {}
+        std::string dark_secret;
+        
+        Contact() : 
+            f_name(""), 
+            l_name(""),
+            nickname(""), 
+            phone_no(""),
+            dark_secret("") 
+            {}
 };
 
 #endif

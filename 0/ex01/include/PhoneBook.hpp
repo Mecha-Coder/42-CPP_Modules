@@ -27,8 +27,7 @@ class PhoneBook
 
     public:
         PhoneBook() : current(0) {} 
-        void add(const std::string& name, const std::string& phone_no);
-        void show();
+        void add();
 };
 
 #endif
