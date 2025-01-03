@@ -1,14 +1,15 @@
 #include <iostream>
 
 /*
-    Initialization list -> initialize member during object contruction;
+    Initialization list -> initialize member during object creation;
 
     Example
     Myvalue object_name(value);
 */
 
 // How to initialize more than 1...
-// Constructor & Destructor
+
+
 class MyValue
 {
     public:

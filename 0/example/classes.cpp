@@ -22,7 +22,16 @@
      - horn()
 */
 
-// Classes have public, private & protected members
+/* 
+Classes have public, private & protected 
+members(both attribute & method)
+*****************************************
+- Public members define the class's interface.
+
+- Private members encapsulate the internal details of the class.
+
+- Protected members allow controlled access between a base class and its derived classes.
+*/
 class Rectangle
 {
     public: 
@@ -39,7 +48,7 @@ int main()
 
     // To access the attribute or method 
     //  -> object_name.attribute
-    //  -> object_name.method
+    //  -> object_name.method()
     
     // assign values
     rect.width = 5.23;
