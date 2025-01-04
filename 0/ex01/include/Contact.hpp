@@ -6,28 +6,28 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 23:08:23 by jpaul             #+#    #+#             */
-/*   Updated: 2025/01/03 23:08:23 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/01/04 09:43:59 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTACT_H
-#define CONTACT_H
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
 
 #include <string>
 
 class Contact 
 {
     public:
-        std::string f_name;
-        std::string l_name;
-        std::string nickname;
+        std::string first_name;
+        std::string last_name;
+        std::string nick_name;
         std::string phone_no;
         std::string dark_secret;
         
         Contact() : 
-            f_name(""), 
-            l_name(""),
-            nickname(""), 
+            first_name(""), 
+            last_name(""),
+            nick_name(""), 
             phone_no(""),
             dark_secret("") 
             {}

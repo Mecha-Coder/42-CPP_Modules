@@ -2,9 +2,9 @@
 # DECLARATION
 #==============================================================
 
-NAME = phonebook
+NAME = my_phonebook
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror -std=c++98 
 
 #==============================================================
 # FILES
@@ -21,7 +21,7 @@ OBJS = $(SRCS:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) 
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ 
 	
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@

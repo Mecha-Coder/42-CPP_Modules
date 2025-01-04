@@ -6,7 +6,7 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 21:20:40 by jpaul             #+#    #+#             */
-/*   Updated: 2025/01/03 21:20:40 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/01/04 09:35:53 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <string>  // concatenate (+ +=), comparison, finding substr, len
 #include <cctype>  // touppper(), isdigit()
 
-#define DEFAULT "LOUD AND UNBEARABLE FEEDBACK NOISE"
+#define DEFAULT "* LOUD AND UNBEARABLE FEEDBACK NOISE *"
 
 int main(int ac, char **av)
 {
