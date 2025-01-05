@@ -10,60 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/PhoneBook.hpp"
+#include "../include/PhoneBook.hpp"
 
-void print(std::string& s)
-{
-    std::cout 
-        << std::setw(10)
-        << (s.length() > 10 ? s.substr(0, 9) + "." : s) 
-        << "|";
-}
+void print(std::string& s);
 
 void PhoneBook::add(std::string info[])
 {
     if (current == CONTACT_MAX)
         current = 0;
-
     if (list[current].first_name != "")
-    {
-        std::cout 
-            << "Override entry" << current 
-            << std::endl;
-    }
-    
+        std::cout << "* Override entry " << current << std::endl;
+
     list[current].first_name  = info[0];
     list[current].last_name   = info[1];
     list[current].nick_name   = info[2];
     list[current].phone_no    = info[3];
     list[current].dark_secret = info[4];
-    
-    std::cout 
-        << "Contact successfully saved in entry" << current 
-        << std::endl;
-    
+
+    std::cout << "Contact successfully saved in entry " << current << std::endl;
     current++;
 }
 
 void PhoneBook::search(int entry)
 {
-    if (entry < 0 || entry >= CONTACT_MAX)
-    {    
-        std::cout 
-            << "Invalid entry range" 
-            << std::endl;
-    }
-    else if (list[entry].first_name == "")
-    {    
-        std::cout 
-            << "Entry " << entry <<" is empty"
-            << std::endl;
-    }
+    if (list[entry].first_name == "")
+        std::cout << "Entry '" << entry <<"' is empty\n" << std::endl;
     else
     {
         std::string s_entry(1, entry + '0');
-        std::cout 
-            << "\n|"
+        std::cout << "\n"
             << "|     Index|First Name| Last Name|  Nickname|"
             << std::endl;
     
@@ -76,11 +51,13 @@ void PhoneBook::search(int entry)
             print(list[entry].first_name);
             print(list[entry].last_name);
             print(list[entry].nick_name);
-        std::cout <<std::endl;
+        std::cout << "\n" <<std::endl;
     }
 }
 
-
-
-
-
+void print(std::string& s)
+{
+    std::cout << std::setw(10)
+        << (s.length() > 10 ? s.substr(0, 9) + "." : s) 
+        << "|";
+}

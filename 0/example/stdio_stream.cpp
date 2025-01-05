@@ -7,6 +7,13 @@
     - stderr
 
     std::endl already inserts a newline and flushes the output buffer, there's no need for additional \n
+
+    std::cin by default:
+        Reads input until it encounters whitespace (spaces, tabs, newlines).
+        Stores the read input in the variable.
+        Leaves any remaining characters (like the rest of your sentence "day to you") in the input buffer.
+
+        Solution: std::getline()
 */
 
 /*

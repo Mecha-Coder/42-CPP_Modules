@@ -2,16 +2,17 @@
 # DECLARATION
 #==============================================================
 
-NAME = app
+# https://text-compare.com/
+
+NAME = account
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98 
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 #==============================================================
 # FILES
 #==============================================================
 
-SRCS =	$(wildcard ./class/*.cpp) \
-		$(wildcard ./logic/*.cpp)
+SRCS =	Account.cpp tests.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -22,7 +23,7 @@ OBJS = $(SRCS:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) 
-	$(CC) $(CFLAGS) -o $@ $^ 
+	$(CC) $(CFLAGS) -o $@ $^
 	
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
