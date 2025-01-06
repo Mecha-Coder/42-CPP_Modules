@@ -2,7 +2,7 @@
 # DECLARATION
 #==============================================================
 
-NAME = violence
+NAME = replace
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
