@@ -10,7 +10,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98
 # FILES
 #==============================================================
 
-SRCS =	megaphone.cpp
+SRCS =	$(wildcard *.cpp)
 
 OBJS = $(SRCS:.cpp=.o)
 
