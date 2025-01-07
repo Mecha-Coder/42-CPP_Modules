@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Harl.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 23:24:53 by jpaul             #+#    #+#             */
-/*   Updated: 2025/01/07 10:44:58 by jpaul            ###   ########.fr       */
+/*   Created: 2025/01/07 10:36:37 by jpaul             #+#    #+#             */
+/*   Updated: 2025/01/07 16:28:18 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HARL_HPP
-#define HARL_HPP
+#include "Harl.hpp"
 
-#include <string>
-#include <iostream>
-#include <map>
-
-class Harl
+typedef enum e_complain
 {
-    private:
-        void debug(void);
-        void info(void);
-        void warning(void);
-        void error(void);
+    WARNING
+} t_complain;
 
-        std::map<std::string, void (Harl::*)()> Complain;
+int main(int ac , char **av) 
+{
+    if (ac != 2)
+    {
+        if (ac < 2)
+            std::cerr << "Enter one of the 4 levels" << std::endl;
+        else
+            std::cerr << "Too many arguments" << std::endl;
+        return (1);
+    }
 
-    public:
-        Harl();
-        void complain(std::string level);
-};
-
-#endif
+    Harl harl;
+    harl.complain(av[1]);
+}

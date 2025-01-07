@@ -6,11 +6,21 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 23:24:50 by jpaul             #+#    #+#             */
-/*   Updated: 2025/01/07 16:50:27 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/01/07 16:33:38 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
+
+enum Level { DEBUG, INFO, WARNING, ERROR };
+
+Harl::Harl()
+{
+    Complain.insert(std::make_pair("DEBUG", &Harl::debug));
+    Complain.insert(std::make_pair("INFO", &Harl::info));
+    Complain.insert(std::make_pair("WARNING", &Harl::warning));
+    Complain.insert(std::make_pair("ERROR", &Harl::error));
+}
 
 void Harl::debug(void)
 {
@@ -50,25 +60,27 @@ void Harl::error(void)
         << std::endl;
 }
 
-Harl::Harl()
-{
-    std::map<std::string, void (Harl::*)()> Complain;
-    Complain["DEBUG"] = &Harl::debug;
-    Complain["INFO"] = &Harl::info;
-    Complain["WARNING"] = &Harl::warning;
-    Complain["ERROR"] = &Harl::error;
-}
-
 void Harl::complain(std::string level)
 {
-    std::map<std::string, void (Harl::*)()>::iterator it = Complain.find(level);
-    
-    if (it != Complain.end())
-        (this->*(it->second))();
-    else
-    {   
-        std::cout 
-            << "[UNKNOWN]"
-            << "BLAH BLAH BLAH..." << std::endl;
+    Level lvl;
+
+    try
+    {
+        lvl = Complain.at(level);
+    }
+    catch (const std::out_of_range& e) 
+    {
+        std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+        return;
+    }
+
+    switch (lvl) 
+    {
+        case DEBUG: debug(); [[fallthrough]]; 
+        case INFO:  info(); [[fallthrough]]; 
+        case WARNING: warning();[[fallthrough]]; 
+        case ERROR:  error();
+        break;
     }
 }
+
