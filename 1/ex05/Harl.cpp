@@ -52,23 +52,22 @@ void Harl::error(void)
 
 Harl::Harl()
 {
-    std::map<std::string, void (Harl::*)()> Complain;
-    Complain["DEBUG"] = &Harl::debug;
-    Complain["INFO"] = &Harl::info;
-    Complain["WARNING"] = &Harl::warning;
-    Complain["ERROR"] = &Harl::error;
+    _complain["DEBUG"] = &Harl::debug;
+    _complain["INFO"] = &Harl::info;
+    _complain["WARNING"] = &Harl::warning;
+    _complain["ERROR"] = &Harl::error;
 }
 
 void Harl::complain(std::string level)
 {
-    std::map<std::string, void (Harl::*)()>::iterator it = Complain.find(level);
-    
-    if (it != Complain.end())
-        (this->*(it->second))();
+    typedef std::map<std::string, void (Harl::*)()>::iterator MapIterator;
+    MapIterator i = _complain.find(level);
+
+    if (i != _complain.end())
+        (this->*(i->second))();
     else
     {   
         std::cout 
-            << "[UNKNOWN]"
             << "BLAH BLAH BLAH..." << std::endl;
     }
 }

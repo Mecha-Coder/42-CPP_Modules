@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Harl.hpp                                           :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 23:24:53 by jpaul             #+#    #+#             */
-/*   Updated: 2025/01/07 10:44:58 by jpaul            ###   ########.fr       */
+/*   Created: 2025/01/08 19:19:05 by jpaul             #+#    #+#             */
+/*   Updated: 2025/01/08 19:19:05 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HARL_HPP
-#define HARL_HPP
+#ifndef FIXED_HPP
+#define FIXED_HPP
 
-#include <string>
 #include <iostream>
-#include <map>
+#include <string>
 
-class Harl
+class Fixed
 {
     private:
-        void debug(void);
-        void info(void);
-        void warning(void);
-        void error(void);
-
-        std::map<std::string, void (Harl::*)()> _complain;
-
+        int fix_point_num;
+        static const int fractional_bits = 8; //int literal '8'
+        
     public:
-        Harl();
-        void complain(std::string level);
+        
+        Fixed();
+        Fixed (const Fixed& other);
+        Fixed& operator=(const Fixed& other);
+        ~Fixed();
+
+        void setRawBits(int const raw);
+        int getRawBits(void) const;
+
 };
 
 #endif

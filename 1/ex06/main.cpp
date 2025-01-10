@@ -6,26 +6,23 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:36:37 by jpaul             #+#    #+#             */
-/*   Updated: 2025/01/07 16:28:18 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/01/07 16:39:52 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 
-typedef enum e_complain
+int main(int ac, char **av) 
 {
-    WARNING
-} t_complain;
-
-int main(int ac , char **av) 
-{
-    if (ac != 2)
+   if (ac != 2)
     {
-        if (ac < 2)
-            std::cerr << "Enter one of the 4 levels" << std::endl;
-        else
-            std::cerr << "Too many arguments" << std::endl;
-        return (1);
+        std::cerr 
+            << "Incorrect input:\n"
+            << "=====================\n"
+            << "./harlFilter <level>\n"
+            << "Level: <DEBUG><INFO><WARNING><ERROR><SWITCH>\n"
+            << std::endl; 
+        return 1;
     }
 
     Harl harl;

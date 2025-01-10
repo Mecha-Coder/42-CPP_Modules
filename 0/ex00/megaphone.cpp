@@ -28,27 +28,9 @@ int main(int ac, char **av)
         i = 0;
         while (av[++i])
             s += av[i];
-
         i = -1;
         while (s[++i])
             s[i] = toupper(s[i]);
     }
     std::cout << s << std::endl;
 }
-
-
-/* Requirement
-
-Arg_no :                                    1
-Input  : ./megaphone "shhhhh... I think the students are asleep..."
-Output :              SHHHHH... I THINK THE STUDENTS ARE ASLEEP...
-
-Arg_no :                1     2                      3
-Input  : ./megaphone Damnit " ! " "Sorry students, I thought this thing was off."
-Output :             DAMNIT ! SORRY STUDENTS, I THOUGHT THIS THING WAS OFF.
-
-Arg_no :      0
-Input  : ./megaphone
-Output :              * LOUD AND UNBEARABLE FEEDBACK NOISE *
-
-*/

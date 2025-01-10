@@ -16,7 +16,7 @@ int main()
 {
     Harl harl;
 
-    std::cout << "Testing Harl's complaints at different levels:" << std::endl;
+    std::cout << "Testing Harl's complaints at different levels\n" << std::endl;
 
     harl.complain("DEBUG");
     std::cout << "===================================\n" << std::endl;

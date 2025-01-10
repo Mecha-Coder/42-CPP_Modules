@@ -25,7 +25,7 @@ class Harl
         void warning(void);
         void error(void);
 
-        std::map<std::string, void (Harl::*)()> Complain;
+        std::map<std::string, void (Harl::*)()> _complain;
 
     public:
         Harl();
