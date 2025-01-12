@@ -1,2 +1,0 @@
-This is some data. 1.12, 3.142
-Another line of data.
