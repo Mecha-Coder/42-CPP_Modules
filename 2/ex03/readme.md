@@ -1,7 +1,7 @@
 # Module 2 > ex03 > Binary space partitioning (BSP)
 
 - **Turn in files**  : `Makefile`, `main.cpp`, `Fixed.hpp`, `Fixed.cpp`, `Point.hpp`, `Point.cpp`
-- **Executable Name**: `./useful_fix_point(--Anything--)`
+- **Executable Name**: `./triangle(--Anything--)`
 - **Allowed**        : `roundf (from <cmath>)`
 - **Forbidden**        : `None`
 
