@@ -48,9 +48,3 @@ bool is_empty(const std::string& s)
     }
     return true;
 }
-
-/* Test cases
-
-./replace 1 line -----
-./replace 2 fun XXXXXXXXX
-*/

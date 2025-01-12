@@ -19,16 +19,9 @@ int main()
     std::cout << "Testing Harl's complaints at different levels\n" << std::endl;
 
     harl.complain("DEBUG");
-    std::cout << "===================================\n" << std::endl;
-    
     harl.complain("INFO");
-    std::cout << "===================================\n" << std::endl;
-    
     harl.complain("WARNING");
-    std::cout << "===================================\n" << std::endl;
-    
     harl.complain("ERROR");
-    std::cout << "===================================\n" << std::endl;
 
     std::cout << "Testing with an unknown level:" << std::endl;
     harl.complain("UNKNOWN");

@@ -75,7 +75,15 @@ int Fixed::toInt(void) const
 {
     return (fix_point_num / (1 << fractional_bits));
 }
+//============================================================================
+void Fixed::setRawBits(int const raw)
+{fix_point_num = raw;}
 
+int Fixed::getRawBits(void) const
+{
+    std::cout << "getRawBits member function called" << std::endl;
+    return (fix_point_num);
+}
 /*
 overloaded insertion operator (<<)
 - allows objects of the Fixed class to be output directly using std::cout

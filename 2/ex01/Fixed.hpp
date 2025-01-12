@@ -32,11 +32,13 @@ class Fixed
         Fixed& operator=(const Fixed& other); // Copy assignment operator
         ~Fixed();                             // Destructor
 
+        void setRawBits(int const raw);       // Update fix value
+        int getRawBits(void) const;           // Get fix value
         float toFloat(void) const;            // Convert to float
         int toInt(void) const;                // Convert to int
-
-        // overloaded insertion operator (<<)
-        friend std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
 };  
+
+// overloaded insertion operator (<<)
+std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
 
 #endif

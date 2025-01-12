@@ -15,6 +15,7 @@
 HumanB::HumanB(std::string n)
 {
     name = n;
+    weapon = NULL;
 }
 
 void HumanB::setWeapon(Weapon &w)
@@ -24,9 +25,9 @@ void HumanB::setWeapon(Weapon &w)
 
 void HumanB::attack(void)
 {
-    std::cout
-        << name
-        << " attacks with their "
-        << weapon->getType()
-        << std::endl; 
+    std::cout << name << " attacks with their ";
+    if (weapon)
+        std::cout << weapon->getType() << std::endl; 
+    else
+        std::cout << "bare hands" << std::endl;
 }

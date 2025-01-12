@@ -1,0 +1,67 @@
+
+
+/* 
+    stdio stream -> object to interact with 
+    - stdin
+    - stdout
+    - stderr
+
+    std::endl inserts a newline and flushes the output buffer, there's no need for additional \n
+
+    std::cin by default:
+        Reads input until it encounters whitespace (spaces, tabs, newlines).
+        Stores the read input in the variable.
+        Leaves any remaining characters (like the rest of your sentence "day to you") in the input buffer.
+
+        Solution: std::getline()
+*/
+
+/*
+    Question: 
+    - input datatype is a string for cin?
+    - how to print to strerr
+
+Note: Notice the <<(out) (in)>> arrow direction
+*/
+
+/*
+#include <iostream>
+void print_text(std::string input)
+{
+    std::cout << input << std::endl;
+}
+
+int main()
+{
+    int number;
+    // char s[] = "Hello world"; Old way
+    std::string s1 = "Hello ";
+    std::string s2 = "World";
+    std::string s = s1 + s2;
+
+    std::cout << "Enter a number: ";
+    std::cin >> number;       // <---auto convert with atoi
+
+    std::cout << "You entered " << number << std::endl;
+    std::cerr << "An error has occurred!\n" << std::endl;
+    std::cout << s << std::endl;
+
+    print_text("Yoyo");
+}
+*/
+
+#include <iostream>
+#include <string>
+
+int main()
+{
+	std::string input;
+	
+	std::cout << "prompt > ";
+	std::getline(std::cin, input);
+	std::cout << input << std::endl;
+	
+	std::cout << "prompt > ";
+	std::cin >> input;
+	std::cout << input << std::endl;
+}

@@ -28,11 +28,11 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
     float totalArea = calculateArea(a, b, c);
 
     // Calculate the area of the sub-triangles formed with the point
-    float area1 = calculateArea(point, b, c);
-    float area2 = calculateArea(a, point, c);
-    float area3 = calculateArea(a, b, point);
+    float a1 = calculateArea(point, b, c);
+    float a2 = calculateArea(a, point, c);
+    float a3 = calculateArea(a, b, point);
 
-    return (area1 + area2 + area3) == totalArea;
+    return a1 > 0 && a2 > 0 && a3 > 0 && (a1 + a2 + a3) == totalArea;
 }
 
 int main(void) 
@@ -40,7 +40,7 @@ int main(void)
     Point a(1,3);
     Point b(-3, 1);
     Point c(2, -2);
-    Point p(0,1);
+    Point p(-1,1.5);
 
     std::cout << "Point(" << p.getX() << "," << p.getY() << ") --> ";
 

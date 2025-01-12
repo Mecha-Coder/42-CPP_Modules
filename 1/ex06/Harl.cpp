@@ -37,7 +37,8 @@ void Harl::warning(void)
     std::cout
         << "[WARNING]\n"
         << "I think I deserve to have some extra bacon for free.\n"
-        << "I’ve been coming for years whereas you started working here since last month.\n"
+        << "I’ve been coming for years whereas you started working "
+        << "here since last month.\n"
         << std::endl;
 }
 
@@ -45,39 +46,45 @@ void Harl::error(void)
 {
     std::cout
         << "[ERROR]\n"
-        << "This is unacceptable!\n"
-        << "I want to speak to the manager now.\n"
+        << "This is unacceptable! I want to speak to the manager now.\n"
         << std::endl;
 }
 
+void Harl::_switch(void) {}
+
 Harl::Harl()
 {
-    _complain["DEBUG"] = &Harl::debug;
-    _complain["INFO"] = &Harl::info;
-    _complain["WARNING"] = &Harl::warning;
-    _complain["ERROR"] = &Harl::error;
-    _complain["SWITCH"] = &Harl::error;
+    lvl[0] = "DEBUG"  ; ft_ptr[0] = &Harl::debug;
+    lvl[1] = "INFO"   ; ft_ptr[1] = &Harl::info;
+    lvl[2] = "WARNING"; ft_ptr[2] = &Harl::warning;
+    lvl[3] = "ERROR"  ; ft_ptr[3] = &Harl::error;
+    lvl[4] = "SWITCH" ; ft_ptr[4] = &Harl::_switch;
+    
 }
 
 void Harl::complain(std::string level)
 {
-    typedef std::map<std::string, void (Harl::*)()>::iterator MapIterator;
-    MapIterator i = _complain.find(level);
-
-    if (i == _complain.end())
+    int i = -1;
+    while (++i < 5)
     {
-         std::cout
-                << "[ Probably complaining about insignificant problems ]\n"
+        if (lvl[i] == level)
+            break;
+    }
+    switch(i)
+    {
+        case 0: (this->*ft_ptr[0])();
+            //fallthrough
+        case 1: (this->*ft_ptr[1])();
+            //fallthrough
+        case 2: (this->*ft_ptr[2])();
+            //fallthrough
+        case 3: (this->*ft_ptr[3])();
+            //fallthrough
+        case 4: (this->*ft_ptr[4])();
+            break;
+        default:
+            std::cout 
+                << "[ Probably complaining about insignificant problems ]"
                 << std::endl;
-    }
-    else
-    {   
-        switch (level[0])
-        {
-            case 'D':   debug(); /* fallthrough */
-            case 'I':    info(); /* fallthrough */
-            case 'W': warning(); /* fallthrough */
-            case 'E':   error();
         }
-    }
 }

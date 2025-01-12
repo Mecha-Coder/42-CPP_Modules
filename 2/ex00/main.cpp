@@ -15,57 +15,23 @@
 int main( void ) 
 {
     Fixed a;       // Default constructor called
-    std::cout << "============================================" << std::endl;
+    std::cout << "--------------------------------------------" << std::endl;
     Fixed b( a );  // Copy constructor called
-    std::cout << "============================================" << std::endl;
+    std::cout << "--------------------------------------------" << std::endl;
     Fixed c;       // Default constructor called
-    std::cout << "============================================" << std::endl;
+    std::cout << "--------------------------------------------" << std::endl;
 
     c = b; // Copy assignment operator called
-    std::cout << "============================================" << std::endl;
+    std::cout << "--------------------------------------------" << std::endl;
 
     std::cout << a.getRawBits() << std::endl;  // getRawBits member function called
     std::cout << b.getRawBits() << std::endl;  // getRawBits member function called
     std::cout << c.getRawBits() << std::endl;  // getRawBits member function called
-    std::cout << "============================================" << std::endl;
+    std::cout << "--------------------------------------------" << std::endl;
 
     a.setRawBits(42);
-    std::cout << a.getRawBits() << std::endl;  // getRawBits member function called
-    std::cout << b.getRawBits() << std::endl;  // getRawBits member function called
-    std::cout << c.getRawBits() << std::endl;  // getRawBits member function called
-    std::cout << "============================================" << std::endl;
+    std::cout << a.getRawBits() << std::endl;  // getRawBits member function 
+    std::cout << "--------------------------------------------" << std::endl;
     return 0; // Destructor called
 }
 
-
-/* Output
-Default constructor called
-
--------------------------------------------
-Copy constructor called
-
--------------------------------------------
-// <-- This line may be missing depending on your implementation
-Copy assignment operator called    
-getRawBits member function called
-
--------------------------------------------
-Default constructor called
-
--------------------------------------------
-Copy assignment operator called
-getRawBits member function called
-
--------------------------------------------
-getRawBits member function called
-0
-getRawBits member function called
-0
-getRawBits member function called
-0
-
--------------------------------------------
-Destructor called
-Destructor called
-Destructor called
-*/

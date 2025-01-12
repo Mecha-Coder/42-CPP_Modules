@@ -31,10 +31,12 @@ class Fixed
         Fixed& operator=(const Fixed& other);  // Copy assignment operator
         ~Fixed();                              // Destructor
 
+        void setRawBits(int const raw);       // Update fix value
+        int getRawBits(void) const;           // Get fix value
         float toFloat(void) const;            // Convert to float
         int toInt(void) const;                // Convert to int
 
-        // Comparison operators
+        // 6 Comparison operators
         bool operator>(const Fixed& other) const;
         bool operator<(const Fixed& other) const;
         bool operator>=(const Fixed& other) const;
@@ -42,7 +44,7 @@ class Fixed
         bool operator==(const Fixed& other) const;
         bool operator!=(const Fixed& other) const;
 
-        // Arithmetic operators
+        // 4 Arithmetic operators
         Fixed operator+(const Fixed& other) const;
         Fixed operator-(const Fixed& other) const;
         Fixed operator*(const Fixed& other) const;
@@ -59,9 +61,9 @@ class Fixed
         static const Fixed& min(const Fixed& a, const Fixed& b);
         static Fixed& max(Fixed& a, Fixed& b);
         static const Fixed& max(const Fixed& a, const Fixed& b);
-
-        // overloaded insertion operator (<<)
-        friend std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
 };  
+
+// overloaded insertion operator (<<)
+std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
 
 #endif

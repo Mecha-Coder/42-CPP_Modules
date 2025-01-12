@@ -20,12 +20,12 @@
 class Harl
 {
     private:
+        std::string lvl[4];
+        void (Harl::*ft_ptr[4])();
         void debug(void);
         void info(void);
         void warning(void);
         void error(void);
-
-        std::map<std::string, void (Harl::*)()> _complain;
 
     public:
         Harl();

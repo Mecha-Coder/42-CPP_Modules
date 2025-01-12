@@ -10,10 +10,10 @@
 - Write a program to accept string arguments
 - Prints all string in UPPERCASE
 
-## 🎯Objective
+## 🤔Lesson learned
 - Familiar with I/O in C++ using `string` and `toupper`
 
-## ✅Expected Results
+## 🧪Expected Results
 
 - **Argument Count**: 1  
   ```bash

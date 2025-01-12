@@ -24,7 +24,7 @@ class Zombie
     public:
         void announce(void);
 
-        Zombie() {}
+        Zombie() {} // <------ Must have default constructor
         Zombie(std::string n);
         ~Zombie();
 };

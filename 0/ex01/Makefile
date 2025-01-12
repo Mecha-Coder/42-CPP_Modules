@@ -10,8 +10,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98
 # FILES
 #==============================================================
 
-SRCS =	$(wildcard ./class/*.cpp) \
-		$(wildcard ./logic/*.cpp)
+SRCS =	$(wildcard *.cpp)
 
 OBJS = $(SRCS:.cpp=.o)
 

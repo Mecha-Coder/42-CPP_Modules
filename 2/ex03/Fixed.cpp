@@ -26,7 +26,6 @@ Fixed::Fixed(const float float_num)
 
 Fixed::~Fixed() {}
 
-
 //=============================================================================
 // Copy assignment operator
 Fixed& Fixed::operator=(const Fixed& other) 
@@ -37,8 +36,15 @@ Fixed& Fixed::operator=(const Fixed& other)
     return *this;
 }
 
-int Fixed::getRawBits(void) const 
+//=============================================================================
+// Setters and getters
+
+void Fixed::setRawBits(int const raw)
+{fix_point_num = raw;}
+
+int Fixed::getRawBits(void) const
 {return (fix_point_num);}
+
 
 //=============================================================================
 // Conversion functions
@@ -51,7 +57,7 @@ int Fixed::toInt(void) const
 
 
 //=============================================================================
-// Conversion functions
+// Comparison functions
 
 bool Fixed::operator>(const Fixed& other) const 
 {return fix_point_num > other.fix_point_num;}
@@ -110,15 +116,23 @@ Fixed Fixed::operator/(const Fixed& other) const
 
 Fixed& Fixed::operator++() 
 {
-    ++fix_point_num;
+    ++fix_point_num;  // Directly modify the object's value
     return *this;
 }
 
+/*
+Why (int) is required for post-increment:
+
+++value vs value++
+- The dummy parameter (int) is used to signal that it's the post-increment version (because there is no real parameter passed when calling value++ in code).
+- It doesn't affect the logic but is required for distinguishing between the two versions of the operator.
+*/
+
 Fixed Fixed::operator++(int) 
 {
-    Fixed temp = *this;
-    ++(*this);
-    return temp;
+    Fixed temp = *this; // Save current state
+    ++(*this);          // Increment value
+    return temp;        // Return the saved state
 }
 
 Fixed& Fixed::operator--() 

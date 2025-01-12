@@ -15,14 +15,16 @@
 
 int main()
 {
-    std::string str = "HI THIS IS BRAIN";
+    std::string str = "HI THIS IS BRAIN"; //data
 
-    std::string *stringPTR = &str;
-    std::string &stringREF = str;
+    std::string stringCOPY = str;  // New address with same data
+    std::string *stringPTR = &str; // Point to the data's address
+    std::string &stringREF = str;  // Store the data's address
 
 
     // Print memory address
     std::cout << &str << std::endl;
+    std::cout << &stringCOPY << std::endl;
     std::cout << &stringPTR << std::endl;
     std::cout << &stringREF << std::endl;
     
@@ -30,6 +32,7 @@ int main()
     
     // Print value
     std::cout << str << std::endl;
+    std::cout << stringCOPY << std::endl;
     std::cout << stringPTR << std::endl;
     std::cout << stringREF << std::endl;
 }
