@@ -6,7 +6,7 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 19:19:07 by jpaul             #+#    #+#             */
-/*   Updated: 2025/01/08 19:19:07 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/01/16 17:41:19 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ int main( void )
     std::cout << a.getRawBits() << std::endl;  // getRawBits member function called
     std::cout << b.getRawBits() << std::endl;  // getRawBits member function called
     std::cout << c.getRawBits() << std::endl;  // getRawBits member function called
-    std::cout << "--------------------------------------------" << std::endl;
 
+    std::cout << "============================================\n"
+                 "               Additional                   \n"
+              << "============================================" << std::endl;
     a.setRawBits(42);
     std::cout << a.getRawBits() << std::endl;  // getRawBits member function 
-    std::cout << "--------------------------------------------" << std::endl;
     return 0; // Destructor called
 }
 
