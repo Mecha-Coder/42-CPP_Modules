@@ -12,6 +12,13 @@
 
 #include "ScavTrap.hpp"
 
+/*
+Rule
+====
+- constructor, destructor & attack print different message
+- proper constructor & destructor chaining
+*/
+
 int main() 
 {
     std::cout << "\n-----------------------------------------------------\n";

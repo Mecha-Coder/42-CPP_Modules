@@ -2,7 +2,7 @@
 # DECLARATION
 #==============================================================
 
-NAME = claptrap
+NAME = diomandtrap
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98
 

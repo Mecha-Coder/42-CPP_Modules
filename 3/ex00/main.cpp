@@ -12,6 +12,22 @@
 
 #include "ClapTrap.hpp"
 
+/*
+Rule
+====
+Hit point = health
+Attack and Repair = -1 energy points
+Do nothing if attack / energy = 0 
+
+attack
+-> it causes its target to lose <attack damage> hit points
+
+repair
+-> repairs itself, it gets <amount> hit points back
+
+take
+-> reduce hit point by <attack damage>
+*/
 int main() 
 {
     ClapTrap clap("Harry");
@@ -20,16 +36,9 @@ int main()
     clap.attack("target_A");
     clap.attack("target_A");
     clap.attack("target_A");
-    clap.attack("target_A");
-    clap.attack("target_A");
-    clap.attack("target_A");
-    clap.attack("target_A");
-    clap.attack("target_A");
-    clap.attack("target_A");
 
 
     std::cout << "\n-----------------------------------------------------\n";
-
 
     clap.takeDamage(3);
     clap.takeDamage(3);
@@ -38,6 +47,7 @@ int main()
     clap.attack("target_A");
     clap.takeDamage(6);
     clap.beRepaired(4);
+    clap.takeDamage(3);
 
     std::cout << "\n-----------------------------------------------------\n";
 }

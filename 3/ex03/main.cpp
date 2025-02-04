@@ -10,27 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int main() 
 {
     std::cout << "\n-----------------------------------------------------\n";
-    ClapTrap clap("Clappy");
-    clap.attack("target1");
-    clap.takeDamage(3);
-    clap.beRepaired(5);
-    clap.attack("target2");
-    clap.takeDamage(12);
-    clap.beRepaired(4);
-
-
-    std::cout << "\n-----------------------------------------------------\n";
     
-    FragTrap frag("Fraggy");
-    frag.attack("enemy2");
-    frag.takeDamage(50);
-    frag.beRepaired(40);
-    frag.highFivesGuys();
+    DiamondTrap diamond("Diamond");
+    diamond.attack("Target Dummy");
+    diamond.takeDamage(20);
+    diamond.beRepaired(10);
+    diamond.whoAmI();
 
     std::cout << "\n-----------------------------------------------------\n";
 }

@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.cpp                                       :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 16:30:01 by jpaul             #+#    #+#             */
-/*   Updated: 2025/01/28 16:35:12 by jpaul            ###   ########.fr       */
+/*   Created: 2025/02/04 17:37:16 by jpaul             #+#    #+#             */
+/*   Updated: 2025/02/04 17:37:16 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef DIAMOND_TRAP_HPP
+#define DIAMOND_TRAP_HPP
+
 #include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
-FragTrap::FragTrap(const std::string& initName) : ClapTrap(initName) 
+class DiamondTrap: public FragTrap, public ScavTrap
 {
-    setHit(100);
-    setEnergy(100);
-    setAttack(30);
-    std::cout << "FragTrap: " << getName() << " constructed!\n";
-}
+    private:
+        std::string name;
 
-FragTrap::~FragTrap()
-{
-    std::cout << "FragTrap: " << getName() << " destructed!\n";
-}
+    public:
+        DiamondTrap(const std::string& new_name);
+        ~DiamondTrap();
 
-void FragTrap::highFivesGuys() 
-{
-    std::cout << "FragTrap: " << getName() << " requests a high five!🙌\n";
-}
+        void attack(const std::string& target);     
+        void whoAmI();
+};
+
+#endif

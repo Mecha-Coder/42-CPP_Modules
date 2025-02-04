@@ -12,31 +12,31 @@
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
+ScavTrap::ScavTrap(const std::string& new_name) : ClapTrap(new_name)
 {
-    hitPoint = 100;
-    energyPoint = 50;
-    attackDamage = 20;
-    std::cout << "ScavTrap " << name << " constructed!" << std::endl;
+    setHit(100);
+    setEnergy(50);
+    setAttack(20);
+    std::cout << "ScavTrap: " << getName() << " constructed!\n";
 }
+
 
 ScavTrap::~ScavTrap() 
-{
-    std::cout << "ScavTrap " << name << " destructed!" << std::endl;
-}
+{std::cout << "ScavTrap: " << getName() << " destructed!\n";}
+
 
 void ScavTrap::guardGate() 
-{
-    std::cout << "ScavTrap " << name << " is now in Gatekeeper mode!" << std::endl;
-}
+{std::cout << "ScavTrap: " << getName() << " is now in Gatekeeper mode\n";}
+
 
 void ScavTrap::attack(const std::string& target)
 {
-    if (hitPoint == 0 || energyPoint == 0)
-    {
-        std::cout << "ScavTrap " << name << " cannot attack. No hit points or energy points left!" << std::endl;
-        return;
-    }
-    energyPoint--;
-    std::cout << "ScavTrap " << name << " attacks " << target << ", causing " << attackDamage << " points of damage!" << std::endl;
+    if (getHit() == 0)            
+        std::cout << "ScavTrap: Can't attack. " << getName() << " is already dead\n";
+    else if (getEnergy() == 0)    
+        std::cout << "ScavTrap: Can't attack. " << getName() << " have no hit / energy points left!\n";
+    else                          
+        std::cout << "ScavTrap: " << getName() << " attack " << target << ", causing " << getAttack() << " damage points\n";
+    if (getHit() && getEnergy())
+        setEnergy(getEnergy() - 1);
 }
