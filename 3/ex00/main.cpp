@@ -32,17 +32,37 @@ int main()
 {
     ClapTrap clap("Harry");
     
+    std::cout << "\n-----------------------------------------------------\n";
+
+    std::cout 
+    << "\nHit   : " << clap.getHit()
+    << "\nEnergy: " << clap.getEnergy()
+    << "\nAttack: " << clap.getAttack() << "\n";
 
     std::cout << "\n-----------------------------------------------------\n";
     clap.attack("target_A");
     clap.attack("target_A");
     clap.attack("target_A");
+    clap.attack("target_A");
+    clap.attack("target_A");
+    clap.attack("target_A");
+    clap.attack("target_A");
+    clap.attack("target_A");
+    clap.attack("target_A");
+    clap.takeDamage(3);
+    clap.takeDamage(3);
+    clap.takeDamage(3);
 
     std::cout << "\n-----------------------------------------------------\n";
 
-    clap.takeDamage(3);
-    clap.takeDamage(3);
-    clap.takeDamage(3);
+    std::cout 
+    << "\nHit   : " << clap.getHit()
+    << "\nEnergy: " << clap.getEnergy()
+    << "\nAttack: " << clap.getAttack() << "\n";
+
+    std::cout << "\n-----------------------------------------------------\n";
+
+    clap.beRepaired(5);
     clap.beRepaired(5);
     clap.attack("target_A");
     clap.takeDamage(6);

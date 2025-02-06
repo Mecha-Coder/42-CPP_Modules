@@ -12,6 +12,15 @@
 
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap(void)
+{std::cout << "ClapTrap: " << name << "default constructor. Do nothing\n";}
+
+ClapTrap::ClapTrap(const ClapTrap& other)
+{
+    *this = other;
+	std::cout << "ClapTrap: " << name << "Copy constructor\n" << std::endl;
+}
+
 ClapTrap::ClapTrap(const std::string& new_name) 
 : name(new_name), hitPoint(10), energyPoint(10), attackDamage(0)
 { std::cout << "ClapTrap: " << name << " constructed!\n"; }
@@ -28,7 +37,7 @@ void ClapTrap::attack(const std::string& target)
     else if (energyPoint == 0)
         std::cout << "ClapTrap: Can't attack. " << name << " have no hit / energy points left!\n";
     else
-        std::cout << name << " attack " << target << ", causing " << attackDamage << " damage points\n";
+        std::cout << "ClapTrap: " << name << " attack " << target << ", causing " << attackDamage << " damage points\n";
     if (hitPoint && energyPoint)
         energyPoint--;
 }
@@ -63,3 +72,13 @@ void ClapTrap::beRepaired(unsigned int amount)
         std::cout << "ClapTrap: " << name << " repaired itself, gaining " << amount << " hit points!\n";
     }
 }
+
+
+unsigned int ClapTrap::getHit() {return hitPoint;}
+unsigned int ClapTrap::getEnergy() {return energyPoint;}
+unsigned int ClapTrap::getAttack() {return attackDamage;}
+std::string ClapTrap::getName(){ return name;}
+
+void ClapTrap::setHit(unsigned int amount) {hitPoint = amount;}
+void ClapTrap::setEnergy(unsigned int amount) {energyPoint = amount;}
+void ClapTrap::setAttack(unsigned int amount) {attackDamage = amount;}

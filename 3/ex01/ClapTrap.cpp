@@ -12,6 +12,15 @@
 
 #include "ClapTrap.hpp"
 
+ClapTrap::ClapTrap(void)
+{std::cout << "ClapTrap: " << name << "default constructor. Do nothing\n";}
+
+ClapTrap::ClapTrap(const ClapTrap& other)
+{
+    *this = other;
+	std::cout << "ClapTrap: " << name << "Copy constructor\n" << std::endl;
+}
+
 ClapTrap::ClapTrap(const std::string& new_name) 
 : name(new_name), hitPoint(10), energyPoint(10), attackDamage(0)
 { std::cout << "ClapTrap: " << name << " constructed!\n"; }
@@ -25,9 +34,9 @@ void ClapTrap::attack(const std::string& target)
 {   
     if (hitPoint == 0)            
         std::cout << "ClapTrap: Can't attack. " << name  << " is already dead\n";
-    else if (energyPoint == 0)    
+    else if (energyPoint == 0)
         std::cout << "ClapTrap: Can't attack. " << name << " have no hit / energy points left!\n";
-    else                          
+    else
         std::cout << "ClapTrap: " << name << " attack " << target << ", causing " << attackDamage << " damage points\n";
     if (hitPoint && energyPoint)
         energyPoint--;
@@ -36,7 +45,7 @@ void ClapTrap::attack(const std::string& target)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-    if (hitPoint == 0)      
+    if (hitPoint == 0)
         std::cout << "ClapTrap: " << name  << " is already dead. Please stop attacking\n";
     else if (hitPoint <= amount) 
     {
@@ -50,10 +59,9 @@ void ClapTrap::takeDamage(unsigned int amount)
     }
 }
 
-
 void ClapTrap::beRepaired(unsigned int amount)
 {
-    if (hitPoint == 0)           
+    if (hitPoint == 0)
         std::cout << "ClapTrap: " << "Can't repair. " << name  << " is already dead\n";
     else if (energyPoint == 0)
         std::cout << "ClapTrap: " << name << " cannot repair. No hit / energy points left!\n";

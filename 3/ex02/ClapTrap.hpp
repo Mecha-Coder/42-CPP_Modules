@@ -6,7 +6,7 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:25:47 by jpaul             #+#    #+#             */
-/*   Updated: 2025/02/04 23:15:01 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/01/28 15:18:09 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ class ClapTrap
         unsigned int attackDamage;
 
     public:
+        ClapTrap(void);
         ClapTrap(const std::string& new_name);
+        ClapTrap(const ClapTrap& other);
         ~ClapTrap();
         
-        void attack(const std::string& target);
+        virtual void attack(const std::string& target);
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);
-        
+
         unsigned int getHit();
         unsigned int getEnergy();
         unsigned int getAttack();

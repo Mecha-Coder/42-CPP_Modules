@@ -6,17 +6,26 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:33:28 by jpaul             #+#    #+#             */
-/*   Updated: 2025/02/04 23:21:29 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/02/04 23:14:37 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap(void) : ClapTrap()
+{std::cout << "ScavTrap: " << getName() << "default constructor. Do nothing\n";}
+
+ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)
+{
+    *this = other;
+	std::cout << "ScavTrap: " << getName() << "Copy constructor\n" << std::endl;
+}
+
 ScavTrap::ScavTrap(const std::string& new_name) : ClapTrap(new_name)
 {
-    setHit(100);
-    setEnergy(50);
-    setAttack(20);
+    this->hitPoint = 100;
+	this->energyPoint = 50;
+	this->attackDamage = 50;
     std::cout << "ScavTrap: " << getName() << " constructed!\n";
 }
 

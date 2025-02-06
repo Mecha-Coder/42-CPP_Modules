@@ -28,8 +28,15 @@ int main()
     
     frag.attack("enemy2");
     frag.takeDamage(50);
-    frag.beRepaired(40);
+    frag.beRepaired(10);
     frag.highFivesGuys();
 
+    std::cout << "\n-----------------------------------------------------\n";
+
+    std::cout 
+    << "\nHit   : " << frag.getHit()
+    << "\nEnergy: " << frag.getEnergy()
+    << "\nAttack: " << frag.getAttack() << "\n";
+    
     std::cout << "\n-----------------------------------------------------\n";
 }

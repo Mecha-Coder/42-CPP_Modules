@@ -6,18 +6,26 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:30:01 by jpaul             #+#    #+#             */
-/*   Updated: 2025/02/04 23:30:06 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/01/28 16:35:12 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 
+FragTrap::FragTrap(void) : ClapTrap()
+{std::cout << "ScavTrap: " << getName() << "default constructor. Do nothing\n";}
+
+FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other)
+{
+    *this = other;
+	std::cout << "ScavTrap: " << getName() << "Copy constructor\n" << std::endl;
+}
+
 FragTrap::FragTrap(const std::string& initName) : ClapTrap(initName) 
 {
-    //setName("something else");
-    setHit(100);
-    setEnergy(100);
-    setAttack(30);
+   	this->hitPoint = 100;
+	this->energyPoint = 100;
+	this->attackDamage = 30;
     std::cout << "FragTrap: " << getName() << " constructed!\n";
 }
 

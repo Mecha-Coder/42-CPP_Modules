@@ -12,6 +12,15 @@
 
 #include "FragTrap.hpp"
 
+FragTrap::FragTrap(void) : ClapTrap()
+{std::cout << "ScavTrap: " << getName() << "default constructor. Do nothing\n";}
+
+FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other)
+{
+    *this = other;
+	std::cout << "ScavTrap: " << getName() << "Copy constructor\n" << std::endl;
+}
+
 FragTrap::FragTrap(const std::string& initName) : ClapTrap(initName) 
 {
     setHit(100);

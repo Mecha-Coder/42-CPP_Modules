@@ -34,9 +34,19 @@ int main()
     std::cout << "\n-----------------------------------------------------\n";
     
     scav.attack("enemy1");
+    scav.attack("enemy1");
+    scav.attack("enemy1");
+    scav.takeDamage(30);
     scav.takeDamage(30);
     scav.beRepaired(20);
     scav.guardGate();
+
+    std::cout << "\n-----------------------------------------------------\n";
+
+     std::cout 
+    << "\nHit   : " << scav.getHit()
+    << "\nEnergy: " << scav.getEnergy()
+    << "\nAttack: " << scav.getAttack() << "\n";
 
     std::cout << "\n-----------------------------------------------------\n";
 }

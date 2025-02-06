@@ -6,7 +6,7 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:28:29 by jpaul             #+#    #+#             */
-/*   Updated: 2025/02/04 22:51:55 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/01/28 16:35:36 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 class FragTrap : virtual public ClapTrap
 {
     public:
+        FragTrap(void);
         FragTrap(const std::string& name);
+        FragTrap(const FragTrap& other);
         ~FragTrap();
 
         void highFivesGuys();

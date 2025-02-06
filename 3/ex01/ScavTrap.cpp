@@ -12,6 +12,15 @@
 
 #include "ScavTrap.hpp"
 
+ScavTrap::ScavTrap(void) : ClapTrap()
+{std::cout << "ScavTrap: " << getName() << "default constructor. Do nothing\n";}
+
+ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other)
+{
+    *this = other;
+	std::cout << "ScavTrap: " << getName() << "Copy constructor\n" << std::endl;
+}
+
 ScavTrap::ScavTrap(const std::string& new_name) : ClapTrap(new_name)
 {
     setHit(100);
