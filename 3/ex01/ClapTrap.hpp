@@ -16,32 +16,37 @@
 #include <iostream>
 #include <string>
 
+typedef std::string str;
+typedef unsigned int uint;
+
 class ClapTrap 
 {
-    private:
-        std::string name;
-        unsigned int hitPoint;
-        unsigned int energyPoint;
-        unsigned int attackDamage;
+    protected:
+        str name;
+        uint hitPoint;
+        uint energyPoint;
+        uint attackDamage;
 
     public:
-        ClapTrap(void);
-        ClapTrap(const std::string& new_name);
+        ClapTrap();
+        ClapTrap(str new_name);
         ClapTrap(const ClapTrap& other);
+        ClapTrap& operator=(const ClapTrap &other);
         ~ClapTrap();
         
-        virtual void attack(const std::string& target);
-        void takeDamage(unsigned int amount);
-        void beRepaired(unsigned int amount);
+        void attack(const str& target);
+        void takeDamage(uint amount);
+        void beRepaired(uint amount);
 
-        unsigned int getHit();
-        unsigned int getEnergy();
-        unsigned int getAttack();
-        std::string getName();
+        uint getHit() const;
+        uint getEnergy() const;
+        uint getAttack() const;
+        str getName() const;
 
-        void setHit(unsigned int amount);
-        void setEnergy(unsigned int amount);
-        void setAttack(unsigned int amount);
+        void setHit(uint amount);
+        void setEnergy(uint amount);
+        void setAttack(uint amount);
+        void setName(str name);
 };
 
 #endif

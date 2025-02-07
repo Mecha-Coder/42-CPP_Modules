@@ -12,25 +12,42 @@
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(void)
-{std::cout << "ClapTrap: " << name << "default constructor. Do nothing\n";}
+//------------------------------------------------------------------------
+// Constructor & Destructor
+
+ClapTrap::ClapTrap()
+{std::cout << "ClapTrap: Default constructor called. No data initialized\n";}
+
+ClapTrap::ClapTrap(str new_name) 
+: name(new_name), hitPoint(10), energyPoint(10), attackDamage(0)
+{ std::cout << "ClapTrap: " << name << " constructed!\n"; }
 
 ClapTrap::ClapTrap(const ClapTrap& other)
 {
     *this = other;
-	std::cout << "ClapTrap: " << name << "Copy constructor\n" << std::endl;
+	std::cout << "ClapTrap: Copy from" << other.name << "\n";
 }
 
-ClapTrap::ClapTrap(const std::string& new_name) 
-: name(new_name), hitPoint(10), energyPoint(10), attackDamage(0)
-{ std::cout << "ClapTrap: " << name << " constructed!\n"; }
-
+ClapTrap& ClapTrap::operator=(const ClapTrap &other)
+{
+    if (this != &other)
+    {
+        name = other.getName();
+        hitPoint = other.getHit();
+        energyPoint = other.getEnergy();
+        attackDamage = other.getAttack();
+    }
+    return (*this);
+    
+}
 
 ClapTrap::~ClapTrap()
 { std::cout << "ClapTrap: " << name  << " destructed!\n"; }
 
+//------------------------------------------------------------------------
+// Methods
 
-void ClapTrap::attack(const std::string& target)
+void ClapTrap::attack(const str& target)
 {   
     if (hitPoint == 0)            
         std::cout << "ClapTrap: Can't attack. " << name  << " is already dead\n";
@@ -42,8 +59,7 @@ void ClapTrap::attack(const std::string& target)
         energyPoint--;
 }
 
-
-void ClapTrap::takeDamage(unsigned int amount)
+void ClapTrap::takeDamage(uint amount)
 {
     if (hitPoint == 0)
         std::cout << "ClapTrap: " << name  << " is already dead. Please stop attacking\n";
@@ -59,7 +75,7 @@ void ClapTrap::takeDamage(unsigned int amount)
     }
 }
 
-void ClapTrap::beRepaired(unsigned int amount)
+void ClapTrap::beRepaired(uint amount)
 {
     if (hitPoint == 0)
         std::cout << "ClapTrap: " << "Can't repair. " << name  << " is already dead\n";
@@ -73,12 +89,15 @@ void ClapTrap::beRepaired(unsigned int amount)
     }
 }
 
+//------------------------------------------------------------------------
+// Setter and getter
 
-unsigned int ClapTrap::getHit() {return hitPoint;}
-unsigned int ClapTrap::getEnergy() {return energyPoint;}
-unsigned int ClapTrap::getAttack() {return attackDamage;}
-std::string ClapTrap::getName(){ return name;}
+uint ClapTrap::getHit() const {return hitPoint;}
+uint ClapTrap::getEnergy() const {return energyPoint;}
+uint ClapTrap::getAttack() const {return attackDamage;}
+str ClapTrap::getName() const { return name;}
 
-void ClapTrap::setHit(unsigned int amount) {hitPoint = amount;}
-void ClapTrap::setEnergy(unsigned int amount) {energyPoint = amount;}
-void ClapTrap::setAttack(unsigned int amount) {attackDamage = amount;}
+void ClapTrap::setHit(uint amount) {hitPoint = amount;}
+void ClapTrap::setEnergy(uint amount) {energyPoint = amount;}
+void ClapTrap::setAttack(uint amount) {attackDamage = amount;}
+void ClapTrap::setName(str new_name) {name = new_name;}

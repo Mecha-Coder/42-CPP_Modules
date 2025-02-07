@@ -14,7 +14,7 @@
 
 int main() 
 {
-    FragTrap frag("Fraggy");
+    FragTrap frag("Lucas");
     
     std::cout << "\n-----------------------------------------------------\n";
     

@@ -22,7 +22,7 @@ Rule
 int main() 
 {
 
-    ScavTrap scav("Scavvy");
+    ScavTrap scav("Saitama");
     
     std::cout << "\n-----------------------------------------------------\n";
 

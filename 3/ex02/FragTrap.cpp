@@ -12,29 +12,46 @@
 
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(void) : ClapTrap()
-{std::cout << "ScavTrap: " << getName() << "default constructor. Do nothing\n";}
+//------------------------------------------------------------------------
+// Constructor & Destructor
 
-FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other)
+FragTrap::FragTrap()
+{std::cout << "FragTrap: Default constructor called. No data initialized\n";}
+
+FragTrap::FragTrap(str new_name) : ClapTrap() 
 {
-    *this = other;
-	std::cout << "ScavTrap: " << getName() << "Copy constructor\n" << std::endl;
+    name = new_name;
+    hitPoint = 100;
+    energyPoint = 100;
+    attackDamage = 30;
+    std::cout << "FragTrap: " << name << " constructed!\n";
 }
 
-FragTrap::FragTrap(const std::string& initName) : ClapTrap(initName) 
+FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other.name)
 {
-    setHit(100);
-    setEnergy(100);
-    setAttack(30);
-    std::cout << "FragTrap: " << getName() << " constructed!\n";
+    *this = other;
+	std::cout << "FragTrap: Copy from" << other.name << "\n";
+}
+
+FragTrap& FragTrap::operator=(const FragTrap &other)
+{
+    if (this != &other)
+    {
+        name = other.getName();
+        hitPoint = other.getHit();
+        energyPoint = other.getEnergy();
+        attackDamage = other.getAttack();
+    }
+    return (*this);
 }
 
 FragTrap::~FragTrap()
-{
-    std::cout << "FragTrap: " << getName() << " destructed!\n";
-}
+{std::cout << "FragTrap: " << name << " destructed!\n";}
+
+//------------------------------------------------------------------------
+// Methods
 
 void FragTrap::highFivesGuys() 
 {
-    std::cout << "FragTrap: " << getName() << " requests a high five!🙌\n";
+    std::cout << "FragTrap: " << name << " requests a high five!🙌\n";
 }

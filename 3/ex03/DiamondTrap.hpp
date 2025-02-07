@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DIAMOND_TRAP_HPP
-#define DIAMOND_TRAP_HPP
+#ifndef DIAMONDTRAP_HPP
+#define DIAMONDTRAP_HPP
 
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
@@ -19,16 +19,16 @@
 class DiamondTrap: public FragTrap, public ScavTrap
 {
     private:
-        std::string name;
+        str name;
 
     public:
 		DiamondTrap();
-        DiamondTrap(const std::string& new_name);
+        DiamondTrap(str new_name);
         DiamondTrap(const DiamondTrap &other);
+        DiamondTrap& operator=(const DiamondTrap &other);
         ~DiamondTrap();
-
-        void attack(const std::string& target);     
-        void whoAmI();
+ 
+        void whoAmI() const;
 };
 
 #endif

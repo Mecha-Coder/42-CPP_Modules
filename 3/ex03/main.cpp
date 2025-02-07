@@ -15,7 +15,7 @@
 int main() 
 {
     
-    DiamondTrap diamond("Diamond");
+    DiamondTrap diamond("Luffy");
     
     std::cout << "\n-----------------------------------------------------\n";
     
@@ -30,6 +30,18 @@ int main()
     diamond.takeDamage(20);
     diamond.beRepaired(10);
     diamond.whoAmI();
+
+    std::cout << "\n---------\n";
+
+    diamond.highFivesGuys();
+    diamond.guardGate();
+
+    std::cout << "\n-----------------------------------------------------\n";
+
+     std::cout 
+        << "\nHit   : " << diamond.getHit()
+        << "\nEnergy: " << diamond.getEnergy()
+        << "\nAttack: " << diamond.getAttack() << "\n";
 
     std::cout << "\n-----------------------------------------------------\n";
 }
