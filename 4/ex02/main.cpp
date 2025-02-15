@@ -26,9 +26,12 @@
 
 int main()
 {
+
     const int size = 6;
     Animal* animals[size];
     
+    // const Animal* meta = new Animal();
+
     for (int i = 0; i < size / 2; ++i)
     {
         animals[i] = new Dog();

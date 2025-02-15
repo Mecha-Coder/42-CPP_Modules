@@ -5,6 +5,7 @@
 
 Dog::Dog()
 {
+    brain = new Brain;
     type = "Dog";
     std::cout << "Dog: <" << type << "> default constructor called\n";
 }
@@ -18,14 +19,30 @@ Dog::Dog(const Dog& other) : Animal()
 Dog& Dog::operator=(const Dog &other)
 {
     if (this != &other)
+    {
         type = other.type;
+        brain = other.brain;
+    }
     std::cout << "Dog: Assignment constructor called" << "\n";
     return (*this);
 }
 
-Dog::~Dog() {std::cout << "Dog: destructed\n";}
+Dog::~Dog() 
+{
+    delete brain;
+    std::cout << "Dog: destructed\n";
+}
         
 //---------------------------------------------------------------------
 // Methods
 
 void Dog::makeSound() const {std::cout << "Dog: woof woof\n";}
+
+//---------------------------------------------------------------------
+// Getter and Setter
+
+void Dog::setIdea(int i, const str &idea)
+{ brain->setIdea(i, idea); }
+
+str Dog::getIdea(int i) const
+{return brain->getIdea(i);}

@@ -25,13 +25,14 @@ class Animal
         Animal(const str& type);
 
     public:
-        Animal();
         Animal(const Animal& other);
         Animal& operator=(const Animal &other);
         virtual ~Animal();
     
-        virtual void makeSound() const;
+        virtual void makeSound() const = 0;
         str getType() const;
+        virtual void setIdea(int i, const str& idea) = 0;
+        virtual str getIdea(int i) const = 0;
 };
 
 #endif

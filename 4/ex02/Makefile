@@ -2,7 +2,7 @@
 # DECLARATION
 #==============================================================
 
-NAME = animal_sound
+NAME = re_brain
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98
 

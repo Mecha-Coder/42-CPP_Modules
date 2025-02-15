@@ -1,47 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.cpp                                         :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/15 15:48:50 by jpaul             #+#    #+#             */
-/*   Updated: 2025/02/15 15:48:50 by jpaul            ###   ########.fr       */
+/*   Created: 2025/02/15 16:03:31 by jpaul             #+#    #+#             */
+/*   Updated: 2025/02/15 16:03:31 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#include "WrongCat.hpp"
 
 //---------------------------------------------------------------------
 // Constructor & Destructor
 
-Animal::Animal() :type("blank")  
-{std::cout << "Animal: <" << type << "> default constructor called\n";}
-
-Animal::Animal(const str& set_type)
+WrongCat::WrongCat()
 {
-    type = set_type;
-	std::cout << "Animal: <" << type << "> parameterized constructor called\n";
+    type = "Cat";
+    cout << "WrongCat: <" << type << "> default constructor called\n";
 }
 
-Animal::Animal(const Animal& other)
+WrongCat::WrongCat(const WrongCat& other) : WrongAnimal()
 {
     *this = other;
-	std::cout << "Animal: Copy from" << other.type << "\n";
+	std::cout << "WrongCat: Copy from" << other.type << "\n";
 }
 
-Animal& Animal::operator=(const Animal &other)
+WrongCat& WrongCat::operator=(const WrongCat &other)
 {
     if (this != &other)
         type = other.type;
-    std::cout << "Animal: Assignment constructor called" << "\n";
+    std::cout << "WrongCat: Assignment constructor called" << "\n";
     return (*this);
 }
 
-Animal::~Animal() {std::cout << "Animal: destructed\n";}
-
+WrongCat::~WrongCat() {cout << "WrongCat: destructed\n";}
+        
 //---------------------------------------------------------------------
 // Methods
 
-void Animal::makeSound()const {std::cout << "Animal: no sound\n";}
-str Animal::getType() const {return type;}
+void WrongCat::makeSound() const {cout << "WrongCat: meow\n";}

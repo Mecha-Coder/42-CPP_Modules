@@ -2,7 +2,7 @@
 # DECLARATION
 #==============================================================
 
-NAME = animal_sound
+NAME = brain
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98
 
@@ -26,6 +26,9 @@ $(NAME): $(OBJS)
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
+leak: $(NAME)
+	valgrind --leak-check=full ./$(NAME)
+
 clean:
 	rm -f $(OBJS) 
 
@@ -34,4 +37,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all leak clean fclean re

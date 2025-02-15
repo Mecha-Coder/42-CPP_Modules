@@ -15,9 +15,6 @@
 //---------------------------------------------------------------------
 // Constructor & Destructor
 
-Animal::Animal() :type("blank")  
-{std::cout << "Animal: <" << type << "> default constructor called\n";}
-
 Animal::Animal(const str& set_type)
 {
     type = set_type;

@@ -32,6 +32,8 @@ class Animal
     
         virtual void makeSound() const;
         str getType() const;
+        virtual void setIdea(int i, const str& idea) = 0;
+        virtual str getIdea(int i) const = 0;
 };
 
 #endif

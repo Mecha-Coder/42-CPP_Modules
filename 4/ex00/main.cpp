@@ -1,129 +1,75 @@
-#include <iostream>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/15 16:03:46 by jpaul             #+#    #+#             */
+/*   Updated: 2025/02/15 16:03:46 by jpaul            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// Base class: Animal
-class Animal {
-protected:
-    std::string type;
 
-public:
-    Animal() : type("Animal") {
-        std::cout << "Animal constructor called\n";
-    }
+#include "Dog.hpp"
+#include "Cat.hpp"
+#include "WrongCat.hpp"
 
-    virtual ~Animal() {
-        std::cout << "Animal destructor called\n";
-    }
+/* Lesson learnt
+- using the base pointer
 
-    virtual void makeSound() const {
-        std::cout << "Some generic animal sound\n";
-    }
+- delete dog and cat with animal pointer
+  only call the base class destructor
+  add virtual
 
-    std::string getType() const {
-        return type;
-    }
-};
+- function overriding
+  - derived and base class having same method name
+    add virtual
+*/
 
-// Derived class: Dog
-class Dog : public Animal {
-public:
-    Dog() {
-        type = "Dog";
-        std::cout << "Dog constructor called\n";
-    }
+int main()
+{
+    cout << "Correct implementation\n\n";
 
-    ~Dog() {
-        std::cout << "Dog destructor called\n";
-    }
-
-    void makeSound() const override {
-        std::cout << "Woof! Woof!\n";
-    }
-};
-
-// Derived class: Cat
-class Cat : public Animal {
-public:
-    Cat() {
-        type = "Cat";
-        std::cout << "Cat constructor called\n";
-    }
-
-    ~Cat() {
-        std::cout << "Cat destructor called\n";
-    }
-
-    void makeSound() const override {
-        std::cout << "Meow! Meow!\n";
-    }
-};
-
-// WrongAnimal base class
-class WrongAnimal {
-protected:
-    std::string type;
-
-public:
-    WrongAnimal() : type("WrongAnimal") {
-        std::cout << "WrongAnimal constructor called\n";
-    }
-
-    virtual ~WrongAnimal() {
-        std::cout << "WrongAnimal destructor called\n";
-    }
-
-    void makeSound() const { // Note: This is NOT virtual
-        std::cout << "Some generic wrong animal sound\n";
-    }
-
-    std::string getType() const {
-        return type;
-    }
-};
-
-// WrongCat derived class
-class WrongCat : public WrongAnimal {
-public:
-    WrongCat() {
-        type = "WrongCat";
-        std::cout << "WrongCat constructor called\n";
-    }
-
-    ~WrongCat() {
-        std::cout << "WrongCat destructor called\n";
-    }
-
-    void makeSound() const { // No override since WrongAnimal's makeSound is not virtual
-        std::cout << "Meow?? (Wrong sound behavior)\n";
-    }
-};
-
-// Main function for testing
-int main() {
-    std::cout << "----- Correct Animal Tests -----\n";
     const Animal* meta = new Animal();
+    std::cout << "-------------------------------------\n";
     const Animal* j = new Dog();
+    cout << "-------------------------------------\n";
     const Animal* i = new Cat();
+    const Animal* x(i);
+    const Animal* y = j;
 
+    cout << "-------------------------------------\n";
     std::cout << j->getType() << " " << std::endl;
     std::cout << i->getType() << " " << std::endl;
+    cout << "-------------------------------------\n";
 
-    i->makeSound(); // Will output the cat sound!
-    j->makeSound(); // Will output the dog sound!
-    meta->makeSound(); // Will output the generic animal sound
-
+    i->makeSound(); //will output the cat sound!
+    j->makeSound();
+    meta->makeSound();
+    cout << "-------------------------------------\n";
+    x->makeSound();
+    y->makeSound();
+    cout << "-------------------------------------\n";
+    
     delete meta;
+    cout << "-------------------------------------\n";
     delete j;
+    cout << "-------------------------------------\n";
     delete i;
+    
+    cout << "\n\n\n\nIncorrect implementation\n\n";
 
-    std::cout << "\n----- Wrong Animal Tests -----\n";
-    const WrongAnimal* wrongMeta = new WrongAnimal();
-    const WrongAnimal* wrongCat = new WrongCat();
-
-    std::cout << wrongCat->getType() << " " << std::endl;
-    wrongCat->makeSound(); // Will output WrongAnimal sound because it's not virtual
-
-    delete wrongMeta;
-    delete wrongCat;
-
-    return 0;
+    const WrongAnimal* beta = new WrongAnimal();
+    cout << "-------------------------------------\n";
+    const WrongAnimal* k = new WrongCat();
+    cout << "-------------------------------------\n";
+    std::cout << k->getType() << " " << std::endl;
+    cout << "-------------------------------------\n";
+    k->makeSound();
+    beta->makeSound();   
+    cout << "-------------------------------------\n";
+    delete k;
+    cout << "-------------------------------------\n";
+    delete beta;
 }
