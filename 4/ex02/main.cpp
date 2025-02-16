@@ -10,19 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "Dog.hpp"
 #include "Cat.hpp"
-
-/* Lesson learnt
-- focuses on polymorphism, deep copying, memory management, and destructor order
-
-- Problem to call setIdea and getIdea because not inside Animal Class
-  add virtual telling the compiler it will be implemented in derived class
-
-- copy of a Dog or a Cat mustn’t be shallow
-- test that your copies are deep copies
-*/
 
 int main()
 {
@@ -30,7 +19,7 @@ int main()
     const int size = 6;
     Animal* animals[size];
     
-    // const Animal* meta = new Animal();
+    //const Animal* meta = new Animal(); <<-- Can't be initialize
 
     for (int i = 0; i < size / 2; ++i)
     {

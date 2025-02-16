@@ -22,10 +22,10 @@ class Animal
 {
     protected:
         str type;
-        Animal(const str& type);
 
     public:
         Animal();
+        Animal(const str& type);
         Animal(const Animal& other);
         Animal& operator=(const Animal &other);
         virtual ~Animal();

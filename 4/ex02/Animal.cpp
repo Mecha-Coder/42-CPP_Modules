@@ -15,30 +15,10 @@
 //---------------------------------------------------------------------
 // Constructor & Destructor
 
-Animal::Animal(const str& set_type)
-{
-    type = set_type;
-	std::cout << "Animal: <" << type << "> parameterized constructor called\n";
-}
-
-Animal::Animal(const Animal& other)
-{
-    *this = other;
-	std::cout << "Animal: Copy from" << other.type << "\n";
-}
-
-Animal& Animal::operator=(const Animal &other)
-{
-    if (this != &other)
-        type = other.type;
-    std::cout << "Animal: Assignment constructor called" << "\n";
-    return (*this);
-}
-
 Animal::~Animal() {std::cout << "Animal: destructed\n";}
 
 //---------------------------------------------------------------------
 // Methods
 
-void Animal::makeSound()const {std::cout << "Animal: no sound\n";}
+//void Animal::makeSound()const {std::cout << "Animal: no sound\n";}
 str Animal::getType() const {return type;}

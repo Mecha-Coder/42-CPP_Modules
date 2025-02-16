@@ -22,15 +22,13 @@ class Animal
 {
     protected:
         str type;
-        Animal(const str& type);
 
     public:
-        Animal(const Animal& other);
-        Animal& operator=(const Animal &other);
+        virtual Animal& operator=(const Animal &other) = 0;
         virtual ~Animal();
-    
-        virtual void makeSound() const = 0;
+
         str getType() const;
+        virtual void makeSound() const = 0;
         virtual void setIdea(int i, const str& idea) = 0;
         virtual str getIdea(int i) const = 0;
 };

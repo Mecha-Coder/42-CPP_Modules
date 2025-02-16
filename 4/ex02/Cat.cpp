@@ -3,13 +3,14 @@
 //---------------------------------------------------------------------
 // Constructor & Destructor
 
-Cat::Cat() : Animal("Cat")
+Cat::Cat()
 {
     brain = new Brain;
+    type = "Cat";
     std::cout << "Cat: <" << type << "> default constructor called\n";
 }
 
-Cat::Cat(const Cat& other) : Animal("Cat")
+Cat::Cat(const Cat& other)
 {
     
     *this = other;
@@ -24,6 +25,14 @@ Cat& Cat::operator=(const Cat &other)
         brain = other.brain;
     }
     std::cout << "Cat: Assignment constructor called" << "\n";
+    return (*this);
+}
+
+Animal& Cat::operator=(const Animal &other)
+{
+    if (this != &other)
+        type = other.getType();
+    std::cout << "Animal: Assignment constructor called" << "\n";
     return (*this);
 }
 
