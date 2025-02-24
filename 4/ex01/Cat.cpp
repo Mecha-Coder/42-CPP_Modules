@@ -5,7 +5,7 @@
 
 Cat::Cat()
 {
-    brain = new Brain;
+    //brain = new Brain;
     type = "Cat";
     std::cout << "Cat: <" << type << "> default constructor called\n";
 }
@@ -30,7 +30,7 @@ Cat& Cat::operator=(const Cat &other)
 
 Cat::~Cat() 
 {
-    delete brain;
+    //delete brain;
     std::cout << "Cat: destructed\n";
 }
         

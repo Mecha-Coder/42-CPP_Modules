@@ -6,7 +6,7 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 15:46:48 by jpaul             #+#    #+#             */
-/*   Updated: 2025/02/15 15:46:48 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/02/18 20:18:56 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ class Animal
         virtual void makeSound() const;
         str getType() const;
         
-        virtual void setIdea(int i, const str& idea) = 0;
-        virtual str getIdea(int i) const = 0;
+       virtual void setIdea(int i, const str& idea) = 0;
+       virtual str getIdea(int i) const = 0;
 };
 
 #endif

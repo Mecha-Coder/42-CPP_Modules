@@ -6,7 +6,7 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 16:03:46 by jpaul             #+#    #+#             */
-/*   Updated: 2025/02/15 16:03:46 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/02/18 20:23:23 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,8 @@ int main()
     animals[2]->setIdea(1, "Chase the rat");
     animals[3]->setIdea(1, "Chase the ball");
 
-    std::cout << animals[2]->getType() << ": " << animals[2]->getIdea(1) << "\n";
-    std::cout << animals[3]->getType() << ": " << animals[3]->getIdea(1) << "\n";
-    std::cout << animals[4]->getType() << ": " << animals[4]->getIdea(1) << "\n";
+    for (int i = 0; i < size; ++i)
+        std::cout << animals[i]->getType() << ": " << animals[i]->getIdea(1) << "\n";
 
     std::cout << "\n\n-------------------------------------\n";
     for (int i = 0; i < size; ++i)
