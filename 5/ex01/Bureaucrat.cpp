@@ -29,7 +29,7 @@ const char *Bureaucrat::InvalidNameException::what() const throw()
 // Constructor & Destructor
 //=============================================================================
 
-Bureaucrat::Bureaucrat(str name, int grade) : _name(name), _grade(grade)
+Bureaucrat::Bureaucrat(str name, int grade)
 {
     std::cout << "Bureaucrat: Parametric constructor called\n";
     if (grade < maxGrade)
@@ -38,6 +38,8 @@ Bureaucrat::Bureaucrat(str name, int grade) : _name(name), _grade(grade)
         throw Bureaucrat::GradeTooLowException();
     if (name.empty())
         throw Bureaucrat::InvalidNameException();
+    _name = name;
+    _grade = grade;
     std::cout << "Bureaucrat: Name= " << name << " Grade= "<< grade << "\n";
 }
 

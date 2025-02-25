@@ -20,8 +20,8 @@
 typedef std::string str;
 
 class Bureaucrat {
-    str const           _name;
-    int                 _grade;
+    str _name;
+    int _grade;
     static const int	maxGrade = 1;
     static const int	minGrade = 150;
 
