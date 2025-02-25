@@ -6,7 +6,7 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:55:09 by jpaul             #+#    #+#             */
-/*   Updated: 2025/02/25 12:55:09 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/02/25 18:15:53 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ const char *Bureaucrat::InvalidNameException::what() const throw()
 // Constructor & Destructor
 //=============================================================================
 
-Bureaucrat::Bureaucrat(str name, int grade)
+Bureaucrat::Bureaucrat(str name, int grade) : _name(name), _grade(grade)
 {
     std::cout << "Bureaucrat: Parametric constructor called\n";
     if (grade < maxGrade)
@@ -38,32 +38,23 @@ Bureaucrat::Bureaucrat(str name, int grade)
         throw Bureaucrat::GradeTooLowException();
     if (name.empty())
         throw Bureaucrat::InvalidNameException();
-    _name = name;
-    _grade = grade;
-    std::cout << "Bureaucrat: Name= " << name << " Grade= "<< grade << "\n";
+    std::cout << "-> Name= " << name << " Grade= "<< grade << "\n\n";
 }
 
 Bureaucrat::~Bureaucrat()
 {std::cout << "Bureaucrat: " << _name << " destroyed\n";}
 
-Bureaucrat::Bureaucrat() 
+Bureaucrat::Bureaucrat() : _name("<blank>")
 {std::cout << "Bureaucrat: Default constructor called. Nothing is set\n";} 
 
-Bureaucrat::Bureaucrat(Bureaucrat const &other) 
-{
-	std::cout << "Bureaucrat: Copy constructor called\n";
-    _name = other.getName(); 
-    _grade = other.getGrade();
-}
+Bureaucrat::Bureaucrat(Bureaucrat const &other) : _name(other.getName()) , _grade(other.getGrade())
+{std::cout << "Bureaucrat: Copy constructor called\n";}
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other)
 {
     std::cout << "Bureaucrat: Assignment constructor called" << "\n";
     if (this != &other)
-    {
-        _name = other.getName();
-        _grade = other.getGrade();
-    }
+        _grade = other.getGrade(); // Can't assign name because it is a constant
     return (*this);
 }
 

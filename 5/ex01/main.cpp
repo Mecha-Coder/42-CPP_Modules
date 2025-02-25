@@ -6,7 +6,7 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:12:30 by jpaul             #+#    #+#             */
-/*   Updated: 2025/02/25 12:12:30 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/02/25 18:11:11 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void invalid_creation()
         try 
             {Bureaucrat candidate(name[i], grade[i]);}
         catch(const std::exception& e)
-            {std::cerr << "Construction exception: " << e.what() << '\n';}
+            {std::cerr << RED "Construction exception: " RESET << e.what() << '\n';}
         std::cout << "----------------------------------------------------\n";
     }
     std::cout << "\n\n";
@@ -45,10 +45,9 @@ void out_of_range(Bureaucrat &obj, int action)
         }
     }
     catch(const std::exception& e)
-        {std::cerr << "Out of range exception: " << e.what() << '\n';}
+        {std::cerr << RED "Out of range exception: " RESET << e.what() << '\n';}
     std::cout << "----------------------------------------------------\n";
 }
-
 
 
 int main()
@@ -74,11 +73,20 @@ int main()
         Bureaucrat test("Maggie", 5);
         test.decrementGrade();
         test.decrementGrade();
+        test.decrementGrade();
         test.incrementGrade();
         std::cout << test << "\n";
+        std::cout << "----------------------------------------------------\n";
+        Bureaucrat assist_1(test);
+        std::cout << assist_1 << "\n";
+        std::cout << "----------------------------------------------------\n";
+        Bureaucrat assist_2;
+        assist_2 = test;
+        std::cout << assist_2 << "\n";
+        std::cout << "----------------------------------------------------\n";
     }
     catch(const std::exception& e)
-        {std::cerr << "Suppose not to catch exception: " << e.what() << '\n';}
+        {std::cerr << RED "Suppose not to catch exception: " RESET << e.what() << '\n';}
     std::cout << "\n\n";
 
 }

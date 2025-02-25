@@ -6,7 +6,7 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 12:51:28 by jpaul             #+#    #+#             */
-/*   Updated: 2025/02/25 12:51:28 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/02/25 18:09:22 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+
+#define RED "\033[31m"
+#define RESET "\033[0m"
 
 typedef std::string str;
 
