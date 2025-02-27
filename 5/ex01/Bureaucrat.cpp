@@ -88,6 +88,14 @@ void Bureaucrat::decrementGrade(void)
     _grade++;
 }
 
+void Bureaucrat::signForm(str form, bool sign)
+{
+    if (sign)
+        std::cout << "Bureaucrat: " << _name << " signed form " << form << "\n";
+    else
+        std::cout << "Bureaucrat: " << _name << " couldn't sign form " << form << " due to incompatible grade\n";
+}
+
 //=============================================================================
 // Overload << Insertion Operator
 //=============================================================================

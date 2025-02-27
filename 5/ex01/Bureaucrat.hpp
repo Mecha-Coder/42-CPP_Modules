@@ -48,6 +48,7 @@ class Bureaucrat {
         int getGrade() const;
         void incrementGrade();
         void decrementGrade();
+        void signForm(str form, bool sign);
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat &obj);

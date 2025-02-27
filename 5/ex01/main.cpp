@@ -10,19 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
-#define increase 1
-#define decrease 0
+#include "Form.hpp"
 
 void invalid_creation()
 {
-    str name[] = {"Syahrul","Don",""};
-    int grade[] = {0, 160, 2};
+    str name[] = {"Form_A", "Form_B","", "Form_C"};
+    int grade[] = {0, 160, 2, 15};
+    int execute[] = {5,10, 20, 200};
 
-    for (int i=0; i < 3; i++)
+    for (int i=0; i < 4; i++)
     {
         try 
-            {Bureaucrat candidate(name[i], grade[i]);}
+            {Form form(name[i], grade[i], execute[i]);}
         catch(const std::exception& e)
             {std::cerr << RED "Construction exception: " RESET << e.what() << '\n';}
         std::cout << "----------------------------------------------------\n";
@@ -30,63 +29,45 @@ void invalid_creation()
     std::cout << "\n\n";
 }
 
-void out_of_range(Bureaucrat &obj, int action)
-{
-    std::cout << "\n";
-    try
-    {
-        while (1)
-        {
-            if (action)
-                obj.incrementGrade();
-            else
-                obj.decrementGrade();
-            std::cout << obj << "\n";
-        }
-    }
-    catch(const std::exception& e)
-        {std::cerr << RED "Out of range exception: " RESET << e.what() << '\n';}
-    std::cout << "----------------------------------------------------\n";
-}
-
-
 int main()
 {
-    // - Blank bureaucrat name
+    // - Blank  name
     // - Grade set too high
     // - Grade set too low
-    std::cout << "\nInvalid creation\n===================\n";
+    std::cout << "\nInvalid creation\n=====================================\n";
     invalid_creation();
+    
+    std::cout << "\nCreate test object\n================================================\n";
+    Bureaucrat timmy("Timmy", 2);
+    Bureaucrat elsa("Elsa", 147);
+    Form form1("Form_2B", 10, 10);
+    std::cout << form1 << "\n";
+    Form form2("Form_EE", 150, 150);
+    std::cout << form2 << "\n";
 
-    // Error when increment and decremment go out of range
-    std::cout << "\nOut of range scenario\n========================\n";
-    Bureaucrat a("Timmy", 2);
-    out_of_range(a, increase);
-    Bureaucrat b("Elsa", 147);
-    out_of_range(b, decrease);
-    std::cout << "\n\n";
 
-    // Normal case without errors
-    std::cout << "\nNormal scenario\n====================\n";
-    try
-    {
-        Bureaucrat test("Maggie", 5);
-        test.decrementGrade();
-        test.decrementGrade();
-        test.decrementGrade();
-        test.incrementGrade();
-        std::cout << test << "\n";
-        std::cout << "----------------------------------------------------\n";
-        Bureaucrat assist_1(test);
-        std::cout << assist_1 << "\n";
-        std::cout << "----------------------------------------------------\n";
-        Bureaucrat assist_2;
-        assist_2 = test;
-        std::cout << assist_2 << "\n";
-        std::cout << "----------------------------------------------------\n";
-    }
-    catch(const std::exception& e)
-        {std::cerr << RED "Suppose not to catch exception: " RESET << e.what() << '\n';}
-    std::cout << "\n\n";
+    std::cout << "\n\n\nForm Signing Test"
+    << "\n====================================================\n";
 
+    std::cout << "\n*********************************\nGrade is insufficient to sign the form"
+        << "\n*********************************\n";
+   
+    try {form1.beSigned(elsa);}
+    catch (const std::exception& e){std::cerr << RED "Signing exception: " RESET << e.what() << '\n';}
+
+    std::cout << "\n*********************************\nSigning unsigned form" 
+        << "\n*********************************\n";
+
+    try {form1.beSigned(timmy);}
+    catch (const std::exception& e){std::cerr << RED "Signing exception: " RESET << e.what() << '\n';}
+
+    try {form2.beSigned(elsa);}
+    catch (const std::exception& e){std::cerr << RED "Signing exception: " RESET << e.what() << '\n';}
+
+    std::cout << "\n*********************************\nTForm already signed "
+        << "\n*********************************\n";
+    try {form2.beSigned(timmy);}
+    catch (const std::exception& e){std::cerr << RED "Signing exception: " RESET << e.what() << '\n';}
+
+    std::cout << "\n\n=============================================================\n\n";
 }
