@@ -17,23 +17,20 @@
 //=============================================================================
 
 const char *Form::GradeTooHighException::what() const throw()
-{return ("Grade can't be greater than 1");}
+{return ("Grade too high");}
 
 const char *Form::GradeTooLowException::what() const throw()
-{return ("Grade can't be lower than 150");}
+{return ("Grade too low");}
 
 const char *Form::InvalidNameException::what() const throw()
-{return ("Form name can't be blank");}
-
-const char *Form::CannotSignException::what() const throw()
-{return ("Can't sign form");}
+{return ("Form's name can't be empty");}
 
 //=============================================================================
 // Constructor & Destructor
 //=============================================================================
 
-Form::Form(str name, int signGrade, int executeGrade) : 
-_name(name), _signStatus(false), _signGrade(signGrade), _executeGrade(executeGrade)
+Form::Form(str name, int signGrade, int executeGrade)
+: name(setName), _signStatus(false), _signGrade(signGrade), _executeGrade(executeGrade)
 {
     std::cout << "Form: Parametric constructor called\n";
     if (_signGrade < maxGrade || _executeGrade < maxGrade)

@@ -18,15 +18,17 @@
 #include <string>
 
 #define RED "\033[31m"
+#define YELLOW "\033[33m"
 #define RESET "\033[0m"
+
+#define maxGrade 1
+#define minGrade 150
 
 typedef std::string str;
 
 class Bureaucrat {
-    str const           _name;
-    int                 _grade;
-    static const int	maxGrade = 1;
-    static const int	minGrade = 150;
+    str const name;
+    int       grade;
 
     class GradeTooHighException : public std::exception
     {public:  virtual const char*what() const throw();};
@@ -46,10 +48,10 @@ class Bureaucrat {
 
         str getName() const;
         int getGrade() const;
-        void incrementGrade();
-        void decrementGrade();
+        void upGrade();
+        void downGrade();
 };
 
-std::ostream& operator<<(std::ostream& os, const Bureaucrat &obj);
+std::ostream& operator<<(std::ostream& out, const Bureaucrat &obj);
 
 #endif

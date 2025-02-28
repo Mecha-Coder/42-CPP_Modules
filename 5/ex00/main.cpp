@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#define increase 1
-#define decrease 0
+#define up 1
+#define down 0
 
 void invalid_creation()
 {
@@ -21,72 +21,76 @@ void invalid_creation()
 
     for (int i=0; i < 3; i++)
     {
-        try 
-            {Bureaucrat candidate(name[i], grade[i]);}
-        catch(const std::exception& e)
-            {std::cerr << RED "Construction exception: " RESET << e.what() << '\n';}
-        std::cout << "----------------------------------------------------\n";
+        try { Bureaucrat person(name[i], grade[i]); }
+        catch (const std::exception& e)
+            { std::cerr << RED "Construction failed: " RESET << e.what() << '\n';}
+        std::cout << "-------------------------------------------------------\n";
     }
     std::cout << "\n\n";
-}
+} 
 
-void out_of_range(Bureaucrat &obj, int action)
+void out_of_range(str name, int grade, int action)
 {
-    std::cout << "\n";
     try
     {
+        Bureaucrat person(name, grade);
         while (1)
         {
             if (action)
-                obj.incrementGrade();
+                person.upGrade();
             else
-                obj.decrementGrade();
-            std::cout << obj << "\n";
+                person.downGrade();
+            std::cout << person << "\n";
         }
     }
-    catch(const std::exception& e)
-        {std::cerr << RED "Out of range exception: " RESET << e.what() << '\n';}
-    std::cout << "----------------------------------------------------\n";
+    catch (const std::exception& e)
+        {std::cerr << RED "Out of range: " RESET << e.what() << '\n';}
+        std::cout << "-------------------------------------------------------\n";
 }
 
 
 int main()
 {
-    // - Blank bureaucrat name
-    // - Grade set too high
-    // - Grade set too low
-    std::cout << "\nInvalid creation\n===================\n";
+    
+    std::cout << YELLOW
+              << "\n1) Instantiate bureaucrat with invalid info"
+              << "\n============================================\n"
+              << RESET;
     invalid_creation();
 
-    // Error when increment and decremment go out of range
-    std::cout << "\nOut of range scenario\n========================\n";
-    Bureaucrat a("Timmy", 2);
-    out_of_range(a, increase);
-    Bureaucrat b("Elsa", 147);
-    out_of_range(b, decrease);
-    std::cout << "\n\n";
+    std::cout << YELLOW
+              << "\n2) Upgrade or Downgrade not within range"
+              << "\n========================================\n"
+              << RESET;
+    out_of_range("Timmy", 2, up);
+    out_of_range("Elsa", 147, down);
 
-    // Normal case without errors
-    std::cout << "\nNormal scenario\n====================\n";
+    std::cout << YELLOW
+              << "\n\n3) Normal case without exception"
+              << "\n==================================\n"
+              << RESET;
     try
     {
         Bureaucrat test("Maggie", 5);
-        test.decrementGrade();
-        test.decrementGrade();
-        test.decrementGrade();
-        test.incrementGrade();
+        std::cout << "-------------------------------------------------------\n";
+        test.downGrade();
+        std::cout << test << "\n";
+        test.downGrade();
+        std::cout << test << "\n";
+        test.downGrade();
+        std::cout << test << "\n";
+        test.upGrade();
         std::cout << test << "\n";
         std::cout << "----------------------------------------------------\n";
-        Bureaucrat assist_1(test);
-        std::cout << assist_1 << "\n";
+        Bureaucrat imposter_1(test);
+        std::cout << imposter_1 << "\n";
         std::cout << "----------------------------------------------------\n";
-        Bureaucrat assist_2;
-        assist_2 = test;
-        std::cout << assist_2 << "\n";
+        Bureaucrat imposter_2;
+        imposter_2 = test;
+        std::cout << imposter_2 << "\n";
         std::cout << "----------------------------------------------------\n";
     }
     catch(const std::exception& e)
-        {std::cerr << RED "Suppose not to catch exception: " RESET << e.what() << '\n';}
-    std::cout << "\n\n";
-
+        {std::cerr << RED "Not to catch exception: " RESET << e.what() << '\n';}
+    std::cout << "\n";
 }

@@ -17,19 +17,19 @@
 //=============================================================================
 
 const char *Bureaucrat::GradeTooHighException::what() const throw()
-{return ("Grade can't be greater than 1");}
+{return ("Grade too high");}
 
 const char *Bureaucrat::GradeTooLowException::what() const throw()
-{return ("Grade can't be lower than 150");}
+{return ("Grade too low");}
 
 const char *Bureaucrat::InvalidNameException::what() const throw()
-{return ("Bureaucrat name can't be blank");}
+{return ("Bureaucrat's name can't be empty");}
 
 //=============================================================================
 // Constructor & Destructor
 //=============================================================================
 
-Bureaucrat::Bureaucrat(str name, int grade) : _name(name), _grade(grade)
+Bureaucrat::Bureaucrat(str setName, int setGrade) : name(setName), grade(setGrade)
 {
     std::cout << "Bureaucrat: Parametric constructor called\n";
     if (grade < maxGrade)
@@ -38,23 +38,24 @@ Bureaucrat::Bureaucrat(str name, int grade) : _name(name), _grade(grade)
         throw Bureaucrat::GradeTooLowException();
     if (name.empty())
         throw Bureaucrat::InvalidNameException();
-    std::cout << "-> Name= " << name << " Grade= "<< grade << "\n\n";
+    std::cout << *this << "\n";
 }
 
 Bureaucrat::~Bureaucrat()
-{std::cout << "Bureaucrat: " << _name << " destroyed\n";}
+{std::cout << "Bureaucrat: " << name << " destroyed\n";}
 
-Bureaucrat::Bureaucrat() : _name("<blank>")
-{std::cout << "Bureaucrat: Default constructor called. Nothing is set\n";} 
+Bureaucrat::Bureaucrat() : name("<blank>") , grade(150)
+{std::cout << "Bureaucrat: Default constructor called\n";} 
 
-Bureaucrat::Bureaucrat(Bureaucrat const &other) : _name(other.getName()) , _grade(other.getGrade())
+Bureaucrat::Bureaucrat(Bureaucrat const &other)
+: name(other.getName()) ,grade(other.getGrade())
 {std::cout << "Bureaucrat: Copy constructor called\n";}
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other)
 {
     std::cout << "Bureaucrat: Assignment constructor called" << "\n";
     if (this != &other)
-        _grade = other.getGrade(); // Can't assign name because it is a constant
+        grade = other.getGrade(); // Can't assign name because it is a constant
     return (*this);
 }
 
@@ -63,37 +64,37 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other)
 //=============================================================================
 
 str Bureaucrat::getName() const
-{return (_name);}
+{return (name);}
 
-int Bureaucrat::getGrade(void) const
-{return (_grade);}
+int Bureaucrat::getGrade() const
+{return (grade);}
 
 //=============================================================================
 // Other Methods
 //=============================================================================
 
 // Increment 3 -> 2
-void Bureaucrat::incrementGrade()
+void Bureaucrat::upGrade()
 {
-    if (_grade == maxGrade)
+    if (grade == maxGrade)
         throw GradeTooHighException();
-    _grade--;
+    grade--;
 }
 
 // Decrement 6 -> 7
-void Bureaucrat::decrementGrade(void)
+void Bureaucrat::downGrade()
 {
-    if (_grade == minGrade)
+    if (grade == minGrade)
         throw GradeTooLowException();
-    _grade++;
+    grade++;
 }
 
-void Bureaucrat::signForm(str form, bool sign)
+void Bureaucrat::signForm(str form, str reason)
 {
-    if (sign)
-        std::cout << "Bureaucrat: " << _name << " signed form " << form << "\n";
+    if (reason.empty())
+        std::cout << name << " signed form " << form << "\n";
     else
-        std::cout << "Bureaucrat: " << _name << " couldn't sign form " << form << " due to incompatible grade\n";
+        std::cout << name << " couldn't sign " << form << " because " << reason << "\n";
 }
 
 //=============================================================================
