@@ -51,7 +51,6 @@ void out_of_range(str name, int grade, int action)
 
 int main()
 {
-    
     std::cout << YELLOW
               << "\n1) Instantiate bureaucrat with invalid info"
               << "\n============================================\n"

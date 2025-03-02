@@ -10,54 +10,54 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
 //=============================================================================
 // Custom Exception
 //=============================================================================
 
-Form::GradeTooHighException::GradeTooHighException(str s) : msg(s + " grade too high") {}
-Form::GradeTooLowException::GradeTooLowException(str s) : msg(s + " grade too low") {}
+AForm::GradeTooHighException::GradeTooHighException(str s) : msg(s + " grade too high") {}
+AForm::GradeTooLowException::GradeTooLowException(str s) : msg(s + " grade too low") {}
 
-const char *Form::GradeTooHighException::what() const throw()
+const char *AForm::GradeTooHighException::what() const throw()
 {return (msg.c_str());}
 
-const char *Form::GradeTooLowException::what() const throw()
+const char *AForm::GradeTooLowException::what() const throw()
 {return (msg.c_str());}
 
-const char *Form::InvalidNameException::what() const throw()
+const char *AForm::InvalidNameException::what() const throw()
 {return ("Form name can't be empty");}
 
 //=============================================================================
 // Constructor & Destructor
 //=============================================================================
 
-Form::Form(str setName, int setApprover, int setActioner)
+AForm::AForm(str setName, int setApprover, int setActioner)
 : name(setName), isSigned(false), signGrade(setApprover), executeGrade(setActioner)
 {
     std::cout << "Form: Parametric constructor called\n";
-    if (signGrade < maxGrade)       throw Form::GradeTooHighException("Sign");
-    if (executeGrade < maxGrade)    throw Form::GradeTooHighException("Execute");
+    if (signGrade < maxGrade)       throw AForm::GradeTooHighException("Sign");
+    if (executeGrade < maxGrade)    throw AForm::GradeTooHighException("Execute");
 
-    if (signGrade > minGrade)       throw Form::GradeTooLowException("Sign");
-    if (executeGrade > minGrade)    throw Form::GradeTooLowException("Execute");
+    if (signGrade > minGrade)       throw AForm::GradeTooLowException("Sign");
+    if (executeGrade > minGrade)    throw AForm::GradeTooLowException("Execute");
 
-    if (name.empty())               throw Form::InvalidNameException();
+    if (name.empty())               throw AForm::InvalidNameException();
     std::cout << *this << "\n";
 }
 
-Form::~Form()
+AForm::~AForm()
 {std::cout << "Form: " << name << " destroyed\n";}
 
-Form::Form() 
+AForm::AForm() 
 : name("<blank>"), isSigned(false), signGrade(150), executeGrade(150)
 {std::cout << "Form: Default constructor called. Set to default value\n";} 
 
-Form::Form(Form const &other) 
+AForm::AForm(AForm const &other) 
 : name(other.getName()) , isSigned(other.getIsSigned()), signGrade(other.getSignGrade()), executeGrade(other.getExecuteGrade())
 {std::cout << "Form: Copy constructor called\n";}
 
-Form& Form::operator=(const Form &other)
+AForm& AForm::operator=(const AForm &other)
 {
     std::cout << "Form: Assignment constructor called" << "\n";
     if (this != &other)
@@ -69,35 +69,35 @@ Form& Form::operator=(const Form &other)
 // Setter & Getter
 //=============================================================================
 
-str Form::getName() const
+str AForm::getName() const
 {return (name);}
 
-int Form::getSignGrade() const
+int AForm::getSignGrade() const
 {return (signGrade);}
 
-int Form::getExecuteGrade() const
+int AForm::getExecuteGrade() const
 {return (executeGrade);}
 
-bool Form::getIsSigned() const
+bool AForm::getIsSigned() const
 {return (isSigned);}
 
 //=============================================================================
 // Other Methods
 //=============================================================================
 
-void Form::beSigned(Bureaucrat &obj)
+void AForm::beSigned(Bureaucrat &approver)
 {
     if (isSigned)
         std::cout << "Form: " << name << " already signed\n";
-    else if(obj.getGrade() <= signGrade)
+    else if(approver.getGrade() <= signGrade)
     {
         isSigned = true;
-        obj.signForm(name, "");
+        approver.signForm(name, "");
     }
     else
     {
-        obj.signForm(name, "grade too low");
-        throw Form::GradeTooLowException("Approval"); 
+        approver.signForm(name, "grade too low");
+        throw AForm::GradeTooLowException("Approval"); 
     }
 }
 
@@ -105,7 +105,7 @@ void Form::beSigned(Bureaucrat &obj)
 // Overload << Insertion Operator
 //=============================================================================
 
-std::ostream& operator<<(std::ostream& out, const Form &obj)
+std::ostream& operator<<(std::ostream& out, const AForm &obj)
 {
     out << "\nForm Detail:\n"
         << "============\n"

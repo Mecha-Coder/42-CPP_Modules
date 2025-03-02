@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-#define FORM_HPP
+#ifndef AFORM_HPP
+#define AFORM_HPP
 
 #include "Bureaucrat.hpp"
 
-class Form {
+class AForm {
     const str name;
     bool      isSigned;
     const int signGrade;
@@ -44,20 +44,21 @@ class Form {
 
 
     public:
-        Form();
-        Form(str setName, int setApprover, int setActioner);
-        Form(const Form &other);
-        Form& operator=(const Form &other);
-        ~Form();
+        AForm();
+        AForm(str setName, int setApprover, int setActioner);
+        AForm(const AForm &other);
+        AForm& operator=(const AForm &other);
+        virtual ~AForm();
 
         str getName() const;
         int getSignGrade() const;
         int getExecuteGrade() const;
         bool getIsSigned() const;
         
-        void beSigned(Bureaucrat &obj);
+        void beSigned(Bureaucrat &approver);
+        virtual void execute(Bureaucrat &executor) const = 0;
 };
 
-std::ostream& operator<<(std::ostream& out, const Form &obj);
+std::ostream& operator<<(std::ostream& out, const AForm &obj);
 
 #endif
