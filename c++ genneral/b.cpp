@@ -12,6 +12,8 @@ Constructor
 ===========
 - A special method that will be invoke each time we create an object
 - Constructor has the same name as the class
+- Make initializing the data easier
+- No return type
 */
 
 class YouTubeChannel {
