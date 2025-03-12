@@ -1,5 +1,6 @@
 /* Lesson-05
 - Constructor inheritance
+- Function overriding (not overloading)
 */
 
 #include <iostream>
@@ -9,8 +10,9 @@ using namespace std;
 class Base
 {
     public:
-    Base() {cout << "Base: Default constructor\n";}
-    Base(int b) {cout << "Base: Parametric constructor = " << b << "\n";}
+    Base()         {cout << "Base: Default constructor\n";}
+    Base(int b)    {cout << "Base: Parametric constructor = " << b << "\n";}
+    void showMsg() {cout << "Base: show msg function\n";}
 };
 
 class Derived_1 : public Base
@@ -20,7 +22,7 @@ class Derived_1 : public Base
 class Derived_2 : public Base
 {
     public:
-    Derived_2() {cout << "Derived_2: Default constructor\n";}
+    Derived_2()      {cout << "Derived_2: Default constructor\n";}
     Derived_2(int b) {cout << "Derived_2: Parametric constructor =" << b << "\n";}
 };
 
@@ -35,6 +37,9 @@ class Derived_3 : public Base
 
     Derived_3(int a, int b) : Base()
     {cout << "Derived_3: Parametric constructor = " << a << " " << b << "\n";}
+
+    void showMsg()
+    {cout << "Derived_3: show msg function";} 
 };
 
 int main()
@@ -54,4 +59,10 @@ int main()
     Derived_3 f(8);
     cout << "---------------------------\n";
     Derived_3 g(8, 10);
+    
+    
+    cout << "\n\nShow message\n==============\n";
+
+    a.showMsg();
+    g.showMsg();
 }
