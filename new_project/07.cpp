@@ -1,5 +1,6 @@
 /* Lesson-07
 - Abstract class
+- How to cleanly destry object of abstract class (Virtual destructor)
 */
 
 #include <iostream>

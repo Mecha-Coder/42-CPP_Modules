@@ -38,6 +38,8 @@ int main()
     Derived_2 d2;
     Derived_3 d3;
 
+    // Derived_1 *test = new Base(); <--- datatype is not compatible
+
     ptr = &d1;
     ptr->show();
     ptr->showme();
