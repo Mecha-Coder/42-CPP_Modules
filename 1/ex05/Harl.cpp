@@ -56,7 +56,6 @@ Harl::Harl()
     lvl[1] = "INFO"   ; ft_ptr[1] = &Harl::info;
     lvl[2] = "WARNING"; ft_ptr[2] = &Harl::warning;
     lvl[3] = "ERROR"  ; ft_ptr[3] = &Harl::error;
-    
 }
 
 void Harl::complain(std::string level)
