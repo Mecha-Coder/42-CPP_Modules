@@ -6,6 +6,9 @@ NAME = bureaucrat
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -Wshadow -std=c++98
 
+GREEN = \033[1;32m
+RESET = \033[0m
+
 #==============================================================
 # FILES
 #==============================================================
@@ -22,6 +25,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) 
 	$(CC) $(CFLAGS) -o $@ $^
+	@echo "$(GREEN)program name ->$(RESET) ./$(NAME)"
 	
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@

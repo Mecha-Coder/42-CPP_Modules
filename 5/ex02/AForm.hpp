@@ -1,64 +1,61 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 14:50:49 by jpaul             #+#    #+#             */
-/*   Updated: 2025/02/27 14:50:49 by jpaul            ###   ########.fr       */
+/*   Created: 2025/03/22 12:09:32 by jpaul             #+#    #+#             */
+/*   Updated: 2025/03/22 18:27:17 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef AFORM_HPP
-#define AFORM_HPP
+#ifndef FORM_HPP
+#define FORM_HPP
 
 #include "Bureaucrat.hpp"
 
 class AForm {
-    const str name;
-    bool      isSigned;
-    const int signGrade;
-    const int executeGrade;
+    const string Name;
+    const int SignGrade;
+    const int ExecuteGrade;
+    bool IsSign;
 
-    class GradeTooHighException : public std::exception
+    class GradeTooHighException : public exception
     {
-        str msg;
-        public: 
-            GradeTooHighException(str s);
-            virtual ~GradeTooHighException() throw() {} 
-            virtual const char *what() const throw();
-    };
-
-    class GradeTooLowException : public std::exception
-    {
-        str msg;
+        string Msg;
         public:
-            GradeTooLowException(str s);
-            virtual ~GradeTooLowException() throw() {} 
-            virtual const char *what() const throw();
+        GradeTooHighException(const string &msg); 
+        virtual ~GradeTooHighException() throw() {}
+        virtual const char *what() const throw();
     };
 
-    class InvalidNameException : public std::exception
-    {public: virtual const char *what() const throw();};
+    class GradeTooLowException : public exception
+    {
+        string Msg;  
+        public:
+        GradeTooLowException(const string &msg);
+        virtual ~GradeTooLowException() throw() {}
+        virtual const char *what() const throw();
+    };
 
+public:
+    AForm();
+    AForm(const string &name, int signGrade, int executeGrade);
+    AForm(const AForm &original);
+    virtual ~AForm();
+    AForm& operator=(const AForm &original);
 
-    public:
-        AForm();
-        AForm(str setName, int setApprover, int setActioner);
-        AForm(const AForm &other);
-        AForm& operator=(const AForm &other);
-        virtual ~AForm();
+    const string &getName() const;
+    int getSignGrade() const;
+    int getExecuteGrade() const;
+    bool getIsSign() const;
 
-        str getName() const;
-        int getSignGrade() const;
-        int getExecuteGrade() const;
-        bool getIsSigned() const;
-        
-        void beSigned(Bureaucrat &approver);
-        virtual void execute(Bureaucrat &executor) const = 0;
+    void beSigned(Bureaucrat &obj);
+    void execute(const Bureaucrat &executor) const;
+
 };
 
-std::ostream& operator<<(std::ostream& out, const AForm &obj);
+ostream &operator<<(ostream &out, const AForm &obj);
 
 #endif

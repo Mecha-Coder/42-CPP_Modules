@@ -5,91 +5,107 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 12:12:30 by jpaul             #+#    #+#             */
-/*   Updated: 2025/02/25 18:11:11 by jpaul            ###   ########.fr       */
+/*   Created: 2025/03/21 18:45:58 by jpaul             #+#    #+#             */
+/*   Updated: 2025/03/22 12:07:58 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#define up 1
-#define down 0
 
-void invalid_creation()
+void test_default_ct()
 {
-    str name[] = {"Syahrul","Don",""};
-    int grade[] = {0, 160, 2};
+    cout << YELLOW
+         << "\n1) Test default constructor"
+         << "\n===========================\n"
+         << RESET;
+    Bureaucrat df;
+    cout << df << "\n";
+}
+
+/*
+Checks performed
+- grade is too low
+- grade is too high
+- no name
+- valid input
+*/
+void test_parametric_ct()
+{
+    cout << YELLOW
+         << "\n2) Test with parametric constructor"
+         << "\n====================================\n";
+    
+    string names[] = {"Monkey", "Donkey", "", "Donald"};
+    int grades[] = {170, 0, 50, 50};
+    
+    for (int i=0; i < 4; i++)
+    {
+        try 
+        {
+            Bureaucrat test(names[i], grades[i]);
+            cout << GREEN "OK: " RESET << test << "\n";
+        }
+        catch (const exception &e)
+        {cout << RED "Construction fail: " RESET << e.what();}
+        cout << "\n--------------------------------------------------\n";
+    }
+}
+
+void test_copy_and_assignment()
+{
+    cout << YELLOW
+         << "\n3) Test copy CT and copy AS "
+         << "\n===========================\n"
+         << RESET;
+
+    Bureaucrat a("Trump", 1);
+    cout << "dummy = " << a << "\n";
+
+    Bureaucrat b(a);
+    cout << "copy CT= " << b << "\n";
+
+    Bureaucrat c;
+    cout << "original = " << c;
+    c = a;
+    cout << "re-assign = " << c << "\n";
+}
+
+void test_increase_decrease()
+{
+    cout << YELLOW
+         << "\n4) Test grade increment / decrement"
+         << "\n====================================\n"
+         << RESET;
+
+    string names[] = {"Monkey", "Donkey", "Donald"};
+    int grades[]   = {2, 148, 50};
+    bool action[]  = {true, false, false};
 
     for (int i=0; i < 3; i++)
     {
-        try { Bureaucrat person(name[i], grade[i]); }
-        catch (const std::exception& e)
-            { std::cerr << RED "Construction failed: " RESET << e.what() << '\n';}
-        std::cout << "-------------------------------------------------------\n";
-    }
-    std::cout << "\n\n";
-} 
-
-void out_of_range(str name, int grade, int action)
-{
-    try
-    {
-        Bureaucrat person(name, grade);
-        while (1)
+        try 
         {
-            if (action)
-                person.upGrade();
+            Bureaucrat test(names[i], grades[i]);
+            if (action[i])
+                cout << GREEN "start increment -> " RESET << test;
             else
-                person.downGrade();
-            std::cout << person << "\n";
+                cout << GREEN "start decrement -> " RESET << test;
+            for (int j=0; j < 4; j++)
+            {
+                action[i]? test.increment() : test.decrement();
+                cout << test;
+            }
         }
+        catch (const exception &e)
+        {cout << RED "Exception caught: " RESET << e.what();}
+        cout << "\n--------------------------------------------------\n";
     }
-    catch (const std::exception& e)
-        {std::cerr << RED "Out of range: " RESET << e.what() << '\n';}
-        std::cout << "-------------------------------------------------------\n";
 }
-
 
 int main()
 {
-    std::cout << YELLOW
-              << "\n1) Instantiate bureaucrat with invalid info"
-              << "\n============================================\n"
-              << RESET;
-    invalid_creation();
-
-    std::cout << YELLOW
-              << "\n2) Upgrade or Downgrade not within range"
-              << "\n========================================\n"
-              << RESET;
-    out_of_range("Timmy", 2, up);
-    out_of_range("Elsa", 147, down);
-
-    std::cout << YELLOW
-              << "\n\n3) Normal case without exception"
-              << "\n==================================\n"
-              << RESET;
-    try
-    {
-        Bureaucrat test("Maggie", 5);
-        std::cout << "-------------------------------------------------------\n";
-        test.downGrade();
-        std::cout << test << "\n";
-        test.downGrade();
-        std::cout << test << "\n";
-        test.downGrade();
-        std::cout << test << "\n";
-        test.upGrade();
-        std::cout << test << "\n";
-        std::cout << "----------------------------------------------------\n";
-        Bureaucrat imposter_1(test);
-        std::cout << imposter_1 << "\n";
-        std::cout << "----------------------------------------------------\n";
-        Bureaucrat imposter_2;
-        imposter_2 = test;
-        std::cout << imposter_2 << "\n";
-        std::cout << "----------------------------------------------------\n";
-    }
-    catch(const std::exception& e)
-        {std::cerr << RED "Not to catch exception: " RESET << e.what() << '\n';}
-    std::cout << "\n";
+    test_default_ct();
+    test_parametric_ct();
+    test_copy_and_assignment();
+    test_increase_decrease();
 }

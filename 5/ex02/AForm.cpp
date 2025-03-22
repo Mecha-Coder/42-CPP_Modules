@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 15:28:20 by jpaul             #+#    #+#             */
-/*   Updated: 2025/02/25 19:49:58 by jpaul            ###   ########.fr       */
+/*   Created: 2025/03/22 12:09:32 by jpaul             #+#    #+#             */
+/*   Updated: 2025/03/22 18:15:33 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,103 +16,108 @@
 // Custom Exception
 //=============================================================================
 
-AForm::GradeTooHighException::GradeTooHighException(str s) : msg(s + " grade too high") {}
-AForm::GradeTooLowException::GradeTooLowException(str s) : msg(s + " grade too low") {}
+AForm::GradeTooHighException::GradeTooHighException(const string &msg)
+: Msg(msg + "grade too high\n"){}
+
+AForm::GradeTooLowException::GradeTooLowException(const string &msg) 
+: Msg(msg + "grade too low\n"){}
 
 const char *AForm::GradeTooHighException::what() const throw()
-{return (msg.c_str());}
+{return Msg.c_str();}
 
 const char *AForm::GradeTooLowException::what() const throw()
-{return (msg.c_str());}
-
-const char *AForm::InvalidNameException::what() const throw()
-{return ("Form name can't be empty");}
+{return Msg.c_str();}
 
 //=============================================================================
 // Constructor & Destructor
 //=============================================================================
 
-AForm::AForm(str setName, int setApprover, int setActioner)
-: name(setName), isSigned(false), signGrade(setApprover), executeGrade(setActioner)
-{
-    std::cout << "Form: Parametric constructor called\n";
-    if (signGrade < maxGrade)       throw AForm::GradeTooHighException("Sign");
-    if (executeGrade < maxGrade)    throw AForm::GradeTooHighException("Execute");
+AForm::AForm()
+: Name("<Unknown>"), SignGrade(150), ExecuteGrade(150), IsSign(false)   // Default
+{cout << "Form: Default CT called\n";}
 
-    if (signGrade > minGrade)       throw AForm::GradeTooLowException("Sign");
-    if (executeGrade > minGrade)    throw AForm::GradeTooLowException("Execute");
 
-    if (name.empty())               throw AForm::InvalidNameException();
-    std::cout << *this << "\n";
+AForm::AForm(const string &name, int signGrade, int execGrade)   // Parametric
+: Name((name.empty())? "<Unknown>" : name),  SignGrade(signGrade), ExecuteGrade(execGrade), IsSign(false)
+{   
+    if (SignGrade < 1)   throw GradeTooHighException("Sign_Grade: "); 
+    if (SignGrade > 150) throw GradeTooLowException("Sign_Grade: ");
+    
+    if (ExecuteGrade < 1)    throw GradeTooHighException("Execute_Grade: "); 
+    if (ExecuteGrade > 150)  throw GradeTooLowException("Execute_Grade: ");
+    
+    cout << "Form: Parametric CT called\n";
 }
 
-AForm::~AForm()
-{std::cout << "Form: " << name << " destroyed\n";}
+AForm::AForm(const AForm &original)   // Copy
+: Name(original.getName()), SignGrade(original.getSignGrade()), ExecuteGrade(original.getExecuteGrade()), IsSign(original.getIsSign())
+{cout << "Form: Copy CT\n";}
 
-AForm::AForm() 
-: name("<blank>"), isSigned(false), signGrade(150), executeGrade(150)
-{std::cout << "Form: Default constructor called. Set to default value\n";} 
+AForm::~AForm() 
+{cout << "Form: Destroy " << Name << "\n";}
 
-AForm::AForm(AForm const &other) 
-: name(other.getName()) , isSigned(other.getIsSigned()), signGrade(other.getSignGrade()), executeGrade(other.getExecuteGrade())
-{std::cout << "Form: Copy constructor called\n";}
+//=============================================================================
+// Overload operator
+//=============================================================================
 
-AForm& AForm::operator=(const AForm &other)
+AForm &AForm::operator=(const AForm &original)
 {
-    std::cout << "Form: Assignment constructor called" << "\n";
-    if (this != &other)
-        isSigned = other.getIsSigned(); // Can't COPY constant
-    return (*this);
+    {cout << "Form: Copy AS OPT\n";}
+    if (this != &original)
+    {
+        // All these values are constant
+        // this->Name = original.getName();
+        // this->SignGrade = original.getSignGrade();
+        // this->ExecuteGrade = original.getExecuteGrade();
+
+        this->IsSign = original.getIsSign();
+    }
+    return *this;
 }
 
 //=============================================================================
 // Setter & Getter
 //=============================================================================
 
-str AForm::getName() const
-{return (name);}
+const string &AForm::getName() const {return Name;}
 
-int AForm::getSignGrade() const
-{return (signGrade);}
+int AForm::getSignGrade() const {return SignGrade;}
 
-int AForm::getExecuteGrade() const
-{return (executeGrade);}
+int AForm::getExecuteGrade() const {return ExecuteGrade;}
 
-bool AForm::getIsSigned() const
-{return (isSigned);}
+bool AForm::getIsSign() const {return IsSign;}
 
 //=============================================================================
 // Other Methods
 //=============================================================================
 
-void AForm::beSigned(Bureaucrat &approver)
-{
-    if (isSigned)
-        std::cout << "Form: " << name << " already signed\n";
-    else if(approver.getGrade() <= signGrade)
+void AForm::beSigned(Bureaucrat &obj)
+{   
+    if (IsSign)
+        cout << "Form " << Name << " already signed\n";
+    else if (obj.getGrade() <= SignGrade)
     {
-        isSigned = true;
-        approver.signForm(name, "");
+        IsSign = true;
+        obj.signForm(IsSign, Name);
     }
     else
     {
-        approver.signForm(name, "grade too low");
-        throw AForm::GradeTooLowException("Approval"); 
+        obj.signForm(IsSign, Name, "grade too low");
+        throw GradeTooLowException("Can't sign: ");    
     }
 }
 
 //=============================================================================
-// Overload << Insertion Operator
+// Ostream Insertion Operator
 //=============================================================================
 
-std::ostream& operator<<(std::ostream& out, const AForm &obj)
+ostream &operator<<(ostream &out, const AForm &obj)
 {
-    out << "\nForm Detail:\n"
-        << "============\n"
-        << "Form Name    : " << obj.getName() << "\n"
-        << "Signed       : " << (obj.getIsSigned() ? "True" : "False") << "\n"
-        << "Approval Grd : " << obj.getSignGrade() << "\n"
-        << "Actioner Grd : " << obj.getExecuteGrade() << "\n";
-
-    return (out);
+    out << "\n"
+        << "Form name     : " << obj.getName() << "\n"
+        << "Sign grade    : " << obj.getSignGrade() << "\n"
+        << "Execute grade : " << obj.getExecuteGrade() << "\n"   
+        << "Already signed: " << (obj.getIsSign()? "Yes" : "No") << "\n"
+        << "\n";
+    return out;
 }

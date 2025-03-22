@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 12:55:09 by jpaul             #+#    #+#             */
-/*   Updated: 2025/02/25 18:15:53 by jpaul            ###   ########.fr       */
+/*   Created: 2025/03/21 18:44:14 by jpaul             #+#    #+#             */
+/*   Updated: 2025/03/22 17:07:52 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,92 +17,81 @@
 //=============================================================================
 
 const char *Bureaucrat::GradeTooHighException::what() const throw()
-{return ("Grade too high");}
+{return "grade too high\n";}
 
 const char *Bureaucrat::GradeTooLowException::what() const throw()
-{return ("Grade too low");}
-
-const char *Bureaucrat::InvalidNameException::what() const throw()
-{return ("Bureaucrat's name can't be empty");}
+{return "grade too low\n";}
 
 //=============================================================================
 // Constructor & Destructor
 //=============================================================================
 
-Bureaucrat::Bureaucrat(str setName, int setGrade) : name(setName), grade(setGrade)
-{
-    std::cout << "Bureaucrat: Parametric constructor called\n";
-    if (grade < maxGrade)
-        throw Bureaucrat::GradeTooHighException();
-    if (grade > minGrade)
-        throw Bureaucrat::GradeTooLowException();
-    if (name.empty())
-        throw Bureaucrat::InvalidNameException();
-    std::cout << *this << "\n";
+Bureaucrat::Bureaucrat() : Name("<Unknown>"), Grade(150)  // Default
+{cout << "Bureaucrat: Default CT called\n";}
+
+
+Bureaucrat::Bureaucrat(const string &name, int grade)    // Parametric
+: Name((name.empty())? "<Unknown>" : name)
+{   
+    if (grade < 1)   throw GradeTooHighException(); 
+    if (grade > 150) throw GradeTooLowException();
+    Grade = grade;    
+    cout << "Bureaucrat: Parametric CT called\n";
 }
 
-Bureaucrat::~Bureaucrat()
-{std::cout << "Bureaucrat: " << name << " destroyed\n";}
+Bureaucrat::Bureaucrat(const Bureaucrat &original)       // Copy
+: Name(original.getName()), Grade(original.getGrade()) 
+{cout << "Bureaucrat: Copy CT\n";}
 
-Bureaucrat::Bureaucrat() : name("<blank>") , grade(150)
-{std::cout << "Bureaucrat: Default constructor called\n";} 
+Bureaucrat::~Bureaucrat() 
+{cout << "Bureaucrat: Destroy " << Name << "\n";}
 
-Bureaucrat::Bureaucrat(Bureaucrat const &other)
-: name(other.getName()) ,grade(other.getGrade())
-{std::cout << "Bureaucrat: Copy constructor called\n";}
+//=============================================================================
+// Overload operator
+//=============================================================================
 
-Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other)
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat &original)
 {
-    std::cout << "Bureaucrat: Assignment constructor called" << "\n";
-    if (this != &other)
-        grade = other.getGrade(); // Can't assign name because it is a constant
-    return (*this);
+    {cout << "Bureaucrat: Copy AS OPT\n";}
+    if (this != &original)
+    {
+        //this->Name = original.getName(); <-- can't work because Name is const 
+        this->Grade = original.getGrade();
+    }
+    return *this;
 }
 
 //=============================================================================
-// Setter & Getter
+// Getter & Setter
 //=============================================================================
 
-str Bureaucrat::getName() const
-{return (name);}
-
-int Bureaucrat::getGrade() const
-{return (grade);}
+const string &Bureaucrat::getName() const {return Name;}
+int Bureaucrat::getGrade() const {return Grade;}
 
 //=============================================================================
 // Other Methods
 //=============================================================================
 
-// Increment 3 -> 2
-void Bureaucrat::upGrade()
-{
-    if (grade == maxGrade)
-        throw GradeTooHighException();
-    grade--;
-}
+void Bureaucrat::increment()
+{(Grade <= 1) ? throw GradeTooHighException() : Grade--;}
+    
+void Bureaucrat::decrement()
+{(Grade >= 150) ? throw GradeTooLowException() : Grade++;}
 
-// Decrement 6 -> 7
-void Bureaucrat::downGrade()
+void Bureaucrat::signForm(bool status, const string &formName, string reason)
 {
-    if (grade == minGrade)
-        throw GradeTooLowException();
-    grade++;
-}
-
-void Bureaucrat::signForm(str form, str reason)
-{
-    if (reason.empty())
-        std::cout << name << " signed form " << form << "\n";
+    if (status)
+        cout << Name << " signed form " << formName << "\n";
     else
-        std::cout << name << " couldn't sign " << form << " because " << reason << "\n";
+        cout << Name << " couldn't signed form " << formName << " because " << reason << "\n";
 }
 
 //=============================================================================
-// Overload << Insertion Operator
+// Ostream Insertion Operator
 //=============================================================================
 
-std::ostream& operator<<(std::ostream& out, const Bureaucrat &obj)
+ostream& operator<<(ostream &out, const Bureaucrat &obj)
 {
-    out << obj.getName() << ", bureaucrat grade " << obj.getGrade(); 
-    return (out);
+    out << obj.getName() << ", bureaucrat grade " << obj.getGrade() << "\n"; 
+    return out;
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 12:51:28 by jpaul             #+#    #+#             */
-/*   Updated: 2025/02/25 18:09:22 by jpaul            ###   ########.fr       */
+/*   Created: 2025/03/21 18:42:19 by jpaul             #+#    #+#             */
+/*   Updated: 2025/03/22 16:45:44 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,38 @@
 #define BUREAUCRAT_HPP
 
 #include <iostream>
-#include <stdexcept>
 #include <string>
+using namespace std;
 
-#define RED "\033[31m"
-#define RESET "\033[0m"
+#define RED    "\033[0;31m"
+#define GREEN  "\033[0;32m"
 #define YELLOW "\033[33m"
-
-#define maxGrade 1
-#define minGrade 150
-
-typedef std::string str;
+#define RESET  "\033[0m"
 
 class Bureaucrat {
-    str const name;
-    int       grade;
+    const string Name;
+    int Grade;
 
-    class GradeTooHighException : public std::exception
-    {public:  virtual const char*what() const throw();};
-
-    class GradeTooLowException : public std::exception
+    class GradeTooHighException : public exception
     {public: virtual const char *what() const throw();};
 
-    class InvalidNameException : public std::exception
+    class GradeTooLowException : public exception
     {public: virtual const char *what() const throw();};
+    
+public:
+    Bureaucrat();
+    Bureaucrat(const string &name, int grade);
+    Bureaucrat(const Bureaucrat &original);
+    ~Bureaucrat();
+    Bureaucrat& operator=(const Bureaucrat &original);
 
-    public:
-        Bureaucrat();
-        Bureaucrat(str name, int grade);
-        Bureaucrat(const Bureaucrat &other);
-        Bureaucrat&	operator=(const Bureaucrat &other);
-        ~Bureaucrat();
+    const string &getName() const;
+    int getGrade() const;
 
-        str getName() const;
-        int getGrade() const;
-        void upGrade();
-        void downGrade();
+    void increment();        
+    void decrement();
 };
 
-std::ostream& operator<<(std::ostream& out, const Bureaucrat &obj);
+ostream& operator<<(ostream &out, const Bureaucrat &obj);
 
 #endif
