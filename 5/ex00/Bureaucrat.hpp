@@ -18,8 +18,8 @@
 #include <string>
 
 #define RED "\033[31m"
-#define YELLOW "\033[33m"
 #define RESET "\033[0m"
+#define YELLOW "\033[33m"
 
 #define maxGrade 1
 #define minGrade 150
