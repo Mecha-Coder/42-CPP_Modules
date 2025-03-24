@@ -12,72 +12,44 @@
 
 #include "Bureaucrat.hpp"
 
-void test_default_ct()
-{
-    cout << YELLOW
-         << "\n1) Test default constructor"
-         << "\n===========================\n"
-         << RESET;
-    Bureaucrat df;
-    cout << df << "\n";
-}
-
 /*
-Checks performed
 - grade is too low
 - grade is too high
 - no name
+- NULL pointer
 - valid input
 */
 void test_parametric_ct()
 {
-    cout << YELLOW
-         << "\n2) Test with parametric constructor"
-         << "\n====================================\n";
+    std::cout << YELLOW
+         << "\nInstantiate w/ valid & invalid input"
+         << "\n=====================================\n";
     
-    string names[] = {"Monkey", "Donkey", "", "Donald"};
-    int grades[] = {170, 0, 50, 50};
+    const char *names[] = {"Monkey", "Donkey", "", NULL, "Donald"};
+    int grades[] = {170, 0, 50, 10, 70};
     
-    for (int i=0; i < 4; i++)
+    for (int i=0; i < 5; i++)
     {
         try 
         {
-            Bureaucrat test(names[i], grades[i]);
-            cout << GREEN "OK: " RESET << test << "\n";
+            Bureaucrat p1(names[i], grades[i]);
+            std::cout << GREEN "OK: " RESET << p1 << "\n";
         }
         catch (const exception &e)
-        {cout << RED "Construction fail: " RESET << e.what();}
-        cout << "\n--------------------------------------------------\n";
+        {std::cout << RED "Construction fail: " RESET << e.what();}
+        std::cout << "\n--------------------------------------------------\n";
     }
-}
-
-void test_copy_and_assignment()
-{
-    cout << YELLOW
-         << "\n3) Test copy CT and copy AS "
-         << "\n===========================\n"
-         << RESET;
-
-    Bureaucrat a("Trump", 1);
-    cout << "dummy = " << a << "\n";
-
-    Bureaucrat b(a);
-    cout << "copy CT= " << b << "\n";
-
-    Bureaucrat c;
-    cout << "original = " << c;
-    c = a;
-    cout << "re-assign = " << c << "\n";
+    std::cout << "\n\n";
 }
 
 void test_increase_decrease()
 {
-    cout << YELLOW
-         << "\n4) Test grade increment / decrement"
-         << "\n====================================\n"
+    std::cout << YELLOW
+         << "\nGrade increment & decrement"
+         << "\n===========================\n"
          << RESET;
 
-    string names[] = {"Monkey", "Donkey", "Donald"};
+    std::string names[] = {"Mickey", "Goofy", "Donald"};
     int grades[]   = {2, 148, 50};
     bool action[]  = {true, false, false};
 
@@ -85,27 +57,26 @@ void test_increase_decrease()
     {
         try 
         {
-            Bureaucrat test(names[i], grades[i]);
+            Bureaucrat p1(names[i], grades[i]);
             if (action[i])
-                cout << GREEN "start increment -> " RESET << test;
+                std::cout << GREEN "start increment -> " RESET << p1;
             else
-                cout << GREEN "start decrement -> " RESET << test;
+                std::cout << GREEN "start decrement -> " RESET << p1;
+    
             for (int j=0; j < 4; j++)
             {
-                action[i]? test.increment() : test.decrement();
-                cout << test;
+                action[i]? p1.increment() : p1.decrement();
+                std::cout << p1;
             }
         }
         catch (const exception &e)
-        {cout << RED "Exception caught: " RESET << e.what();}
-        cout << "\n--------------------------------------------------\n";
+        {std::cout << RED "Exception caught: " RESET << e.what();}
+        std::cout << "\n--------------------------------------------------\n";
     }
 }
 
 int main()
 {
-    test_default_ct();
     test_parametric_ct();
-    test_copy_and_assignment();
     test_increase_decrease();
 }

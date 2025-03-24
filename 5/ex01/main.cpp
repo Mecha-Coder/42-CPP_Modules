@@ -12,17 +12,6 @@
 
 #include "Form.hpp"
 
-void test_default_ct()
-{
-    cout << YELLOW
-         << "\n1) Test default constructor"
-         << "\n===========================\n"
-         << RESET;
-    Form df;
-    cout << df << "\n";
-}
-
-
 /*
 - sign grade too high
 - sign grade too low
@@ -33,11 +22,11 @@ void test_default_ct()
 */
 void test_parametric_ct()
 {
-    cout << YELLOW
-         << "\n2) Test with parametric constructor"
-         << "\n====================================\n";
+    std::cout << YELLOW
+         << "\nInstantiate w/ valid & invalid input"
+         << "\n=====================================\n";
     
-    string names[] = {"AForm", "BForm", "CForm", "DForm", "" ,"EForm"};
+    const char *names[] = {"AForm", "BForm", "CForm", "DForm", "" ,"EForm"};
     int signGrades[] = {170, 0, 50, 50, 50, 1};
     int executeGrade[] = {50, 50, 170, 0, 50, 1};
     
@@ -45,41 +34,13 @@ void test_parametric_ct()
     {
         try 
         {
-            Form test(names[i], signGrades[i], executeGrade[i]);
-            cout << GREEN "OK: " RESET << test << "\n";
+            Form f1(names[i], signGrades[i], executeGrade[i]);
+            std::cout << GREEN "OK: " RESET << f1 << "\n";
         }
         catch (const exception &e)
-        {cout << RED "Construction fail: " RESET << e.what();}
-        cout << "\n--------------------------------------------------\n";
+        {std::cout << RED "Construction fail: " RESET << e.what();}
+        std::cout << "\n--------------------------------------------------\n";
     }
-}
-
-
-void test_copy_and_assignment()
-{
-    cout << YELLOW
-         << "\n3) Test copy CT and copy AS "
-         << "\n===========================\n"
-         << RESET;
-
-    Bureaucrat p1("Trump", 1);
-    Form a("B18", 1, 1);
-    cout << "dummy = " << a << "\n";
-    
-    cout << "--------------------------------------------------\n";
-
-    a.beSigned(p1);
-    Form b(a);
-    cout << "copy CT= " << b << "\n";
-
-    cout << "--------------------------------------------------\n";
-    
-    Form c;
-    cout << "original = " << c;
-    c = a;
-    cout << "re-assign = " << c << "\n";
-
-    cout << "--------------------------------------------------\n";
 }
 
 
@@ -90,39 +51,46 @@ void test_copy_and_assignment()
 */
 void test_form_signing()
 {
-    cout << YELLOW
-         << "\n4) Test form signing"
-         << "\n===========================\n"
+    std::cout << YELLOW
+         << "\n\n\nTest form signing"
+         << "\n=================\n"
          << RESET;
 
-    cout << "Init test\n***********\n";
+    std::cout << "Init test\n***********\n";
     
-    Bureaucrat Person1("Trump", 1);
+    Bureaucrat trump("Trump", 1);
     Form A1("A1", 1, 10);
-    
-    Bureaucrat Person2("Donald", 30);
+    std::cout << A1;
+
+    Bureaucrat donald("Donald", 30);
     Form B1("B1", 50, 50);
+    std::cout << B1;
 
-    cout << "\n\n";
+    std::cout << "========================\n\n";
 
-    try {A1.beSigned(Person2);}
+    try {A1.beSigned(donald);}
     catch (const exception &e)
-    {cout << RED "Exception caught: " RESET << e.what();}
+    {std::cout << RED "Exception caught: " RESET << e.what();}
     
-    cout << "\n--------------------------------------------------\n";
-    B1.beSigned(Person2);
-    cout << "\n--------------------------------------------------\n";
-    B1.beSigned(Person1);
-    cout << "\n--------------------------------------------------\n";
-    A1.beSigned(Person1);
-    cout << "\n--------------------------------------------------\n";
+    try {
+    std::cout << "\n--------------------------------------------------\n";
+    B1.beSigned(donald);
+    std::cout << "\n--------------------------------------------------\n";
+    B1.beSigned(trump);
+    std::cout << "\n--------------------------------------------------\n";
+    A1.beSigned(trump);
+    std::cout << "\n--------------------------------------------------\n";
+    } catch (const exception &e)
+    {std::cout << RED "Exception caught: " RESET << e.what();}
+
+    std::cout << GREEN "Confirm both A1 and B1 signed" RESET << A1 << B1;
+
+    std::cout << "\n--------------------------------------------------\n";
 }
 
 
 int main()
 {
-    test_default_ct();
     test_parametric_ct();
-    test_copy_and_assignment();
     test_form_signing();
 }

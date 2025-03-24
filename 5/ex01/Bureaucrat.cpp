@@ -26,25 +26,25 @@ const char *Bureaucrat::GradeTooLowException::what() const throw()
 // Constructor & Destructor
 //=============================================================================
 
-Bureaucrat::Bureaucrat() : Name("<Unknown>"), Grade(150)  // Default
-{cout << "Bureaucrat: Default CT called\n";}
+Bureaucrat::Bureaucrat() : Name("<Unknown>"), Grade(150)
+{std::cout << "Bureaucrat: Default CT called\n";}
 
 
-Bureaucrat::Bureaucrat(const string &name, int grade)    // Parametric
+Bureaucrat::Bureaucrat(const str &name, int grade)
 : Name((name.empty())? "<Unknown>" : name)
 {   
     if (grade < 1)   throw GradeTooHighException(); 
     if (grade > 150) throw GradeTooLowException();
     Grade = grade;    
-    cout << "Bureaucrat: Parametric CT called\n";
+    std::cout << "Bureaucrat: Parametric CT called\n";
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &original)       // Copy
+Bureaucrat::Bureaucrat(const Bureaucrat &original)
 : Name(original.getName()), Grade(original.getGrade()) 
-{cout << "Bureaucrat: Copy CT\n";}
+{std::cout << "Bureaucrat: Copy CT\n";}
 
 Bureaucrat::~Bureaucrat() 
-{cout << "Bureaucrat: Destroy " << Name << "\n";}
+{std::cout << "Bureaucrat: Destroy " << Name << "\n";}
 
 //=============================================================================
 // Overload operator
@@ -52,7 +52,7 @@ Bureaucrat::~Bureaucrat()
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &original)
 {
-    {cout << "Bureaucrat: Copy AS OPT\n";}
+    {std::cout << "Bureaucrat: Copy AS OPT\n";}
     if (this != &original)
     {
         //this->Name = original.getName(); <-- can't work because Name is const 
@@ -65,7 +65,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &original)
 // Getter & Setter
 //=============================================================================
 
-const string &Bureaucrat::getName() const {return Name;}
+const str &Bureaucrat::getName() const {return Name;}
 int Bureaucrat::getGrade() const {return Grade;}
 
 //=============================================================================
@@ -78,19 +78,19 @@ void Bureaucrat::increment()
 void Bureaucrat::decrement()
 {(Grade >= 150) ? throw GradeTooLowException() : Grade++;}
 
-void Bureaucrat::signForm(bool status, const string &formName, string reason)
+void Bureaucrat::signForm(bool status, const str &formName, str reason)
 {
     if (status)
-        cout << Name << " signed form " << formName << "\n";
+        std::cout << Name << " signed form " << formName << "\n";
     else
-        cout << Name << " couldn't signed form " << formName << " because " << reason << "\n";
+        std::cout << Name << " couldn't signed form " << formName << " because " << reason << "\n";
 }
 
 //=============================================================================
 // Ostream Insertion Operator
 //=============================================================================
 
-ostream& operator<<(ostream &out, const Bureaucrat &obj)
+std::ostream& operator<<(std::ostream &out, const Bureaucrat &obj)
 {
     out << obj.getName() << ", bureaucrat grade " << obj.getGrade() << "\n"; 
     return out;

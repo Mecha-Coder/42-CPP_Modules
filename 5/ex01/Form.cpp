@@ -16,10 +16,10 @@
 // Custom Exception
 //=============================================================================
 
-Form::GradeTooHighException::GradeTooHighException(const string &msg)
+Form::GradeTooHighException::GradeTooHighException(const str &msg)
 : Msg(msg + "grade too high\n"){}
 
-Form::GradeTooLowException::GradeTooLowException(const string &msg) 
+Form::GradeTooLowException::GradeTooLowException(const str &msg) 
 : Msg(msg + "grade too low\n"){}
 
 const char *Form::GradeTooHighException::what() const throw()
@@ -33,11 +33,11 @@ const char *Form::GradeTooLowException::what() const throw()
 //=============================================================================
 
 Form::Form()
-: Name("<Unknown>"), SignGrade(150), ExecuteGrade(150), IsSign(false)   // Default
-{cout << "Form: Default CT called\n";}
+: Name("<Unknown>"), SignGrade(150), ExecuteGrade(150), IsSign(false)
+{std::cout << "Form: Default CT called\n";}
 
 
-Form::Form(const string &name, int signGrade, int execGrade)   // Parametric
+Form::Form(const str &name, int signGrade, int execGrade)
 : Name((name.empty())? "<Unknown>" : name),  SignGrade(signGrade), ExecuteGrade(execGrade), IsSign(false)
 {   
     if (SignGrade < 1)   throw GradeTooHighException("Sign_Grade: "); 
@@ -46,15 +46,15 @@ Form::Form(const string &name, int signGrade, int execGrade)   // Parametric
     if (ExecuteGrade < 1)    throw GradeTooHighException("Execute_Grade: "); 
     if (ExecuteGrade > 150)  throw GradeTooLowException("Execute_Grade: ");
     
-    cout << "Form: Parametric CT called\n";
+    std::cout << "Form: Parametric CT called\n";
 }
 
-Form::Form(const Form &original)   // Copy
+Form::Form(const Form &original)
 : Name(original.getName()), SignGrade(original.getSignGrade()), ExecuteGrade(original.getExecuteGrade()), IsSign(original.getIsSign())
-{cout << "Form: Copy CT\n";}
+{std::cout << "Form: Copy CT\n";}
 
 Form::~Form() 
-{cout << "Form: Destroy " << Name << "\n";}
+{std::cout << "Form: Destroy " << Name << "\n";}
 
 //=============================================================================
 // Overload operator
@@ -62,7 +62,7 @@ Form::~Form()
 
 Form &Form::operator=(const Form &original)
 {
-    {cout << "Form: Copy AS OPT\n";}
+    {std::cout << "Form: Copy AS OPT\n";}
     if (this != &original)
     {
         // All these values are constant
@@ -79,7 +79,7 @@ Form &Form::operator=(const Form &original)
 // Setter & Getter
 //=============================================================================
 
-const string &Form::getName() const {return Name;}
+const str &Form::getName() const {return Name;}
 
 int Form::getSignGrade() const {return SignGrade;}
 
@@ -94,7 +94,7 @@ bool Form::getIsSign() const {return IsSign;}
 void Form::beSigned(Bureaucrat &obj)
 {   
     if (IsSign)
-        cout << "Form " << Name << " already signed\n";
+        std::cout << "Form " << Name << " already signed\n";
     else if (obj.getGrade() <= SignGrade)
     {
         IsSign = true;
@@ -111,7 +111,7 @@ void Form::beSigned(Bureaucrat &obj)
 // Ostream Insertion Operator
 //=============================================================================
 
-ostream &operator<<(ostream &out, const Form &obj)
+std::ostream &operator<<(std::ostream &out, const Form &obj)
 {
     out << "\n"
         << "Form name     : " << obj.getName() << "\n"

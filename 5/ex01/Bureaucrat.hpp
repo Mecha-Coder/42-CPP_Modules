@@ -15,7 +15,8 @@
 
 #include <iostream>
 #include <string>
-using namespace std;
+typedef std::string str;
+typedef std::exception exception;
 
 #define RED    "\033[0;31m"
 #define GREEN  "\033[0;32m"
@@ -23,7 +24,7 @@ using namespace std;
 #define RESET  "\033[0m"
 
 class Bureaucrat {
-    const string Name;
+    const str Name;
     int Grade;
 
     class GradeTooHighException : public exception
@@ -34,19 +35,19 @@ class Bureaucrat {
     
 public:
     Bureaucrat();
-    Bureaucrat(const string &name, int grade);
+    Bureaucrat(const str &name, int grade);
     Bureaucrat(const Bureaucrat &original);
     ~Bureaucrat();
     Bureaucrat& operator=(const Bureaucrat &original);
 
-    const string &getName() const;
+    const str &getName() const;
     int getGrade() const;
 
     void increment();        
     void decrement();
-    void signForm(bool status, const string &formName, string reason="");
+    void signForm(bool status, const str &formName, str reason="");
 };
 
-ostream& operator<<(ostream &out, const Bureaucrat &obj);
+std::ostream& operator<<(std::ostream &out, const Bureaucrat &obj);
 
 #endif

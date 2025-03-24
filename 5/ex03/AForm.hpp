@@ -57,7 +57,7 @@ public:
 
     void beSigned(Bureaucrat &obj);
     virtual void execute(const Bureaucrat &executor) const = 0;
-
+    virtual const str getTarget() const = 0;
 };
 
 std::ostream &operator<<(std::ostream &out, const AForm &obj);

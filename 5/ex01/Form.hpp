@@ -16,45 +16,44 @@
 #include "Bureaucrat.hpp"
 
 class Form {
-    const string Name;
+    const str Name;
     const int SignGrade;
     const int ExecuteGrade;
     bool IsSign;
 
     class GradeTooHighException : public exception
     {
-        string Msg;
+        str Msg;
         public:
-        GradeTooHighException(const string &msg); 
+        GradeTooHighException(const str &msg); 
         virtual ~GradeTooHighException() throw() {}
         virtual const char *what() const throw();
     };
 
     class GradeTooLowException : public exception
     {
-        string Msg;  
+        str Msg;  
         public:
-        GradeTooLowException(const string &msg);
+        GradeTooLowException(const str &msg);
         virtual ~GradeTooLowException() throw() {}
         virtual const char *what() const throw();
     };
 
 public:
     Form();
-    Form(const string &name, int signGrade, int executeGrade);
+    Form(const str &name, int signGrade, int executeGrade);
     Form(const Form &original);
     ~Form();
     Form& operator=(const Form &original);
 
-    const string &getName() const;
+    const str &getName() const;
     int getSignGrade() const;
     int getExecuteGrade() const;
     bool getIsSign() const;
 
     void beSigned(Bureaucrat &obj);
-
 };
 
-ostream &operator<<(ostream &out, const Form &obj);
+std::ostream &operator<<(std::ostream &out, const Form &obj);
 
 #endif

@@ -1,1 +1,0 @@
-c++ -Wall -Wextra -Werror -Wshadow -std=c++98
