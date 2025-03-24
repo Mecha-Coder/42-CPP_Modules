@@ -6,7 +6,7 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/23 11:49:47 by jpaul             #+#    #+#             */
-/*   Updated: 2025/03/23 11:49:47 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/03/24 12:31:39 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,8 @@ void test_PardonForm()
 
 int main()
 {
-//    test_ShrubberyForm(); // <--- chmod 444
+    // AForm test; <---converted to abstract class
+   test_ShrubberyForm(); // <--- chmod 444
 //    test_RobotomyForm();
-   test_PardonForm();
+//    test_PardonForm();
 }
