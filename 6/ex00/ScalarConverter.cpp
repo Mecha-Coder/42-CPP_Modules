@@ -57,7 +57,7 @@ Input requirement
 Valid inputs
 ***************************************
 ./convert 'a' 'c' 'A' '@'
-./convert 0 42 -42 -123
+./convert 0 -1 42 -42 6289
 ./convert 2147483647 2147483999
 ./convert –2147483648 –2147483999
 ./convert 3.14 2.71

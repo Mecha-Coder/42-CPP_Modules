@@ -43,8 +43,8 @@ int main()
     // Print int, float, and double
     cout << "char   : '" << a << "'\n";
     cout << "int    : " << b << "\n";
-    cout << "float  : " << setprecision(6) << c << "f\n";
-    cout << "double : " << setprecision(15) << d << "\n\n\n";
+    cout << "float  : " << fixed << c << "f\n";
+    cout << "double : " << fixed << d << "\n\n\n";
 
 
     cout << nanDouble << "\n";
