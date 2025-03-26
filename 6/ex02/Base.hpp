@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Base.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 17:52:01 by jpaul             #+#    #+#             */
-/*   Updated: 2025/03/25 18:09:18 by jpaul            ###   ########.fr       */
+/*   Created: 2025/03/26 13:15:54 by jpaul             #+#    #+#             */
+/*   Updated: 2025/03/26 13:15:54 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
+#ifndef BASE_HPP
+#define BASE_HPP
 
-int main(int ac, char **av)
-{
-    //ScalarConverter a; // <---- Can't instantiate
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
 
-    if (ac != 2 || !av[1][0]) 
-    {
-        std::cerr << "\n"
-             << "Invalid argument\n"
-             << "================\n"
-             << "Expected: ./convert [value]\n\n";
-        return EXIT_FAILURE;
-    }
-    ScalarConverter::convert(av[1]);
-}
+class Base {
+public:
+    virtual ~Base(){} 
+};
+
+class A : public Base {};
+
+class B : public Base {};
+
+class C : public Base {};
+
+#endif

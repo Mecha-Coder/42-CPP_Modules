@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Serializer.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 17:52:01 by jpaul             #+#    #+#             */
-/*   Updated: 2025/03/25 18:09:18 by jpaul            ###   ########.fr       */
+/*   Created: 2025/03/26 12:10:06 by jpaul             #+#    #+#             */
+/*   Updated: 2025/03/26 12:10:06 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
+#ifndef SERIALIZE_HPP
+#define SERIALIZE_HPP
 
-int main(int ac, char **av)
+#include <iostream>
+#include <cstdint>
+
+typedef struct s_data
 {
-    //ScalarConverter a; // <---- Can't instantiate
+    bool status;
+} Data;
 
-    if (ac != 2 || !av[1][0]) 
-    {
-        std::cerr << "\n"
-             << "Invalid argument\n"
-             << "================\n"
-             << "Expected: ./convert [value]\n\n";
-        return EXIT_FAILURE;
-    }
-    ScalarConverter::convert(av[1]);
-}
+class Serializer
+{
+    Serializer();
+    Serializer(const Serializer &original);
+    ~Serializer();
+public:
+    static uintptr_t serialize(Data *ptr);
+    static Data *deserialize(uintptr_t raw);
+};
+
+#endif

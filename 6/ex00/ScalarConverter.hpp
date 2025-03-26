@@ -10,16 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef SCALARCONVERTER_HPP
+#define SCALARCONVERTER_HPP
+
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <cstdlib>
 #include <limits>
-using namespace std;
+typedef std::string str;
 
 class ScalarConverter
 {
     ScalarConverter();
+    ScalarConverter(const ScalarConverter &original);
     ~ScalarConverter();
 public:
-    static void convert(string s);
+    static void convert(str s);
 };
+
+#endif
