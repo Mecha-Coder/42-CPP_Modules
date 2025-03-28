@@ -6,7 +6,7 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 18:12:41 by jpaul             #+#    #+#             */
-/*   Updated: 2025/03/26 18:53:48 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/03/27 17:55:41 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,15 @@ int main()
 
     int a = 2;
     int b = 3;
+    
     ::swap( a, b );
     std::cout << "a = " << a << ", b = " << b << std::endl;
     std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
     std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
+
     std::string c = "chaine1";
     std::string d = "chaine2";
+    
     ::swap(c, d);
     std::cout << "c = " << c << ", d = " << d << std::endl;
     std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Array.cpp                                          :+:      :+:    :+:   */
+/*   Array.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:58:15 by jpaul             #+#    #+#             */
-/*   Updated: 2025/03/27 15:58:15 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/03/27 18:43:33 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ Array<T>::Array()
 {
     Arr = NULL;
     Size = 0;
-    std::cout << "Default CT\n";
 }
 
 template <typename T>
@@ -38,14 +37,15 @@ Array<T>::Array (const Array &obj)
 {
     Size = obj.Size;
     Arr = new T[Size];
-    for (int i=0; i < Size; i++)
-        Arr[i] = obj.Arr()[i];
+    for (unsigned int i=0; i < Size; i++)
+        Arr[i] = obj.Arr[i];
 }
 
 template <typename T>
 Array<T>::~Array()
 {
-    if (Arr) {delete[] Arr;}
+    //if (Arr) {delete[] Arr;} <--- No need to check if Arr is NULL
+    delete[] Arr;
 }
 
 //=============================================================================
@@ -60,7 +60,7 @@ Array<T> &Array<T>::operator=(const Array<T> &obj)
         delete[] Arr;
         Size = obj.Size;
         Arr = new T[Size];
-        for (int i=0; i < Size; i++)
+        for (unsigned int i=0; i < Size; i++)
             Arr[i] = obj.Arr[i];
     }
     return *this;
