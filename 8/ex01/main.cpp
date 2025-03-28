@@ -6,13 +6,14 @@
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 21:08:08 by jpaul             #+#    #+#             */
-/*   Updated: 2025/03/27 22:00:50 by jpaul            ###   ########.fr       */
+/*   Updated: 2025/03/28 21:15:04 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <set>
 #include <algorithm>
+#include <iterator>
+#include <set>
 
 class Span {
     unsigned int N;
@@ -21,37 +22,61 @@ class Span {
     class StorageFullException : public std::exception 
     {public: 
         virtual const char *what() const throw()
-        {return "Storage is full. Can't add anymore numbers\n";}
+        {return "Can't add anymore numbers\n";}
     };
 
     class FailToComputeException : public std::exception 
     {public: 
         virtual const char *what() const throw()
-        {return "Fail to compute span\n";}
+        {return "Fail to compute span. Not enough numbers\n";}
     };
     
 public:
-    Span (unsigned int n) : N(n) {}
+    Span (unsigned int n)
+    {
+        if (n < 5)
+            throw std::invalid_argument("Required at least 5");
+        N = n;
+    }
 
     void addNumber(int x)
     {
-        if (N >= arr.size())
+        if (arr.size() == N)
             throw StorageFullException();
         arr.insert(x);
     }
 
-    void shortestSpan()
+    template <typename T>
+    void addNumber(T begin, T end)
     {
-        if (arr.size() < 2)
-            throw FailToComputeException();
-      
+        if (arr.size() + std::distance(begin, end) == N)
+            throw StorageFullException();
+        arr.insert(begin, end);
     }
 
-    void shortestSpan()
+    
+
+    int shortestSpan()
     {
         if (arr.size() < 2)
             throw FailToComputeException();
+        
+        int num = *arr.rbegin();
+        int newNum;
 
-        arr.
+        for(std::set<int>::iterator i = std::next(arr.begin()) ; i != arr.end(); i++)
+        {
+            newNum = *i - *std::prev(i, 1);
+            if (num > newNum) 
+                num = newNum;
+        }
+        return (num);
+    }
+
+    int longestSpan()
+    {
+        if (arr.size() < 2)
+            throw FailToComputeException();
+        return (*arr.rbegin() - *arr.begin()); 
     }
 };
