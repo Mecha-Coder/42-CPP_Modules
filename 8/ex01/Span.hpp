@@ -35,9 +35,12 @@ class Span {
     class FailToComputeException : public std::exception 
     {public: virtual const char *what() const throw();};
     
+    Span();
 public:
     Span (long int n);
-    
+    Span(const Span &obj);
+    Span &operator=(const Span &obj);
+
     void addNumber(int x);
     template <typename T> void addNumber(T begin, T end);
     

@@ -27,20 +27,31 @@ const char *Span::FailToComputeException::what() const throw()
 // Constructor & Destructor
 //=============================================================================
 
+Span::Span(){}
+
 Span::Span (long int n) : N(static_cast<unsigned int>(n))
 {
-    if (n < 5) throw std::invalid_argument("Required at least 5\n");
+    if (n < 5) throw std::invalid_argument("The minimum limit need to be atleast 5\n");
+}
+
+Span::Span (const Span &obj) : N(obj.N)
+{
+   arr.insert(obj.arr.begin(), obj.arr.end());
 }
 
 //=============================================================================
 // Overload function
 //=============================================================================
 
-void Span::addNumber(int x)
+Span &Span::operator=(const Span &obj)
 {
-    if (arr.size() == N)
-        throw StorageFullException();
-    arr.insert(x);
+    if (this != &obj)
+    {
+        this->N = obj.N;
+        this->arr.clear();
+        this->arr.insert(obj.arr.begin(), obj.arr.end());
+    }
+    return *this;
 }
 
 //=============================================================================
@@ -82,3 +93,10 @@ void Span::showNumbers()
         std::cout << *i << ", ";
     std::cout << "\n";
 }   
+
+void Span::addNumber(int x)
+{
+    if (arr.size() == N)
+        throw StorageFullException();
+    arr.insert(x);
+}

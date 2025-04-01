@@ -64,10 +64,10 @@ Smaller elements to insert: [2, 1, 4, 3, 6, 11] (partners of [5,9,7,8,10,12]).
 int main(int ac, char **av)
 {
     Vector a;
-    //List b;
+    List b;
     Deque c;
     clock_t start, end;
-    if (!init_and_fill(ac, av, a, c)) 
+    if (!init_and_fill(ac, av, a, b, c)) 
         return EXIT_FAILURE;
     
     std::cout << YELLOW "\nVector container\n================\n" RESET
@@ -79,13 +79,13 @@ int main(int ac, char **av)
     process_time(start, end, a.size());
    
 
-    // std::cout << YELLOW "\nList container\n================\n" RESET
-    //           << GREEN "Before :\n" RESET; showNumber(b); 
-    // start = clock();
-    // Ford_John_Sort(b);
-    // end = clock();
-    // std::cout << RED "\nAfter  : \n" RESET; showNumber(b);
-    // process_time(start, end, b.size());
+    std::cout << YELLOW "\nList container\n================\n" RESET
+              << GREEN "Before :\n" RESET; showNumber(b); 
+    start = clock();
+    Ford_John_Sort(b);
+    end = clock();
+    std::cout << RED "\nAfter  : \n" RESET; showNumber(b);
+    process_time(start, end, b.size());
 
     std::cout << YELLOW "\nDeque container\n================\n" RESET
               << GREEN "Before :\n" RESET; showNumber(c); 

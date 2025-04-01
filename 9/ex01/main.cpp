@@ -34,11 +34,15 @@ int main(int ac, char **av)
     if (ac != 2) return err_msg(BAD_ARG);
     str s = av[1];
 
+    // Loop through the string
     for (size_t i=0; i < s.size(); i++)
     {
+        // If digit, convert and put to stack
         if (isdigit(s[i]))
             Stack.push(s[i] - '0');
 
+        // If operator, pop 2 elements (ensure have 2 elements) 
+        //  => compute => push back to stack
         else if (isOperator(s[i]))
         {
             if (Stack.size() < 2) 
@@ -53,6 +57,7 @@ int main(int ac, char **av)
         else                   return err_msg(BAD_EXPRESS);
     }
 
+    // Validate final result
     if (Stack.empty())
         return err_msg(BAD_EXPRESS);
     
@@ -76,8 +81,10 @@ OK
 ./RPN "7 7 * 7 -"            // Output: 42
 ./RPN "1 2 * 2 / 2 * 2 4 - +" // Output: 0
 ./RPN "3"                    // Output: 3
+./RPN "5 2 /"            // Output: 2
 
 KO
+./RPN "5 /"
 ./RPN "3 0 /"
 ./RPN "    "
 ./RPN ""

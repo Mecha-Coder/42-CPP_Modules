@@ -27,7 +27,7 @@ bool err_msg(Error code)
 void process_time(clock_t start, clock_t end, size_t size)
 {
     double time =static_cast<double>(end - start) / CLOCKS_PER_SEC * 1e6;
-    std::cout << "\nProcess time for " << size << " elements is = " 
+    std::cout << "\nSorting time for " << size << " elements is = " 
               << time << " us\n";
 }
 
@@ -175,7 +175,7 @@ void Ford_John_Sort(Vector &vector)
     b++;
 
     // If 1 number, no need to sort
-    // If 2 number, swap them if not sorted
+    // If 2 numbers, swap them if not sorted
     if (vector.size() == 1) return;
     if (vector.size() == 2) 
     {
