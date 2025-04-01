@@ -14,7 +14,7 @@
 
 int main(int ac, char **av)
 {
-    //ScalarConverter a; // <---- Can't instantiate
+    // ScalarConverter a; // <---- Can't instantiate
 
     if (ac != 2 || !av[1][0]) 
     {

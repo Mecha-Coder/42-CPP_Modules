@@ -47,7 +47,7 @@ void printOut(char *a, int *b, float *c, double *d)
 }
 
 bool isSpecial(const str &s)
-{
+{                      //0                               0
     str special[] = {"+inff", "inff", "-inff", "nanf", "+inf", "inf", "-inf", "nan"};
 
     for(int i=0; i < 8; i++)
@@ -70,7 +70,7 @@ bool isSpecial(const str &s)
 bool isChar(const str &s)
 {
     if (s.size() == 1 && !isdigit(s[0]))
-    {
+    {   
         C = static_cast<char>(s[0]);
         I = static_cast<int>(s[0]);
         F = static_cast<float>(s[0]);
@@ -129,7 +129,7 @@ bool isNumber(str &s)
 }
 
 void ScalarConverter::convert(str s)
-{
+{     // ASCII 32 -126 'a' '~' '1'
     if (!isChar(s) && !isSpecial(s) && !isNumber(s))
         printOut(NULL, NULL, NULL, NULL);
 }

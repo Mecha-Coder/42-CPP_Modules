@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
+/*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpaul <jpaul@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/24 12:46:52 by jpaul             #+#    #+#             */
-/*   Updated: 2025/03/25 20:02:24 by jpaul            ###   ########.fr       */
+/*   Created: 2025/04/01 05:19:06 by jpaul             #+#    #+#             */
+/*   Updated: 2025/04/01 05:19:06 by jpaul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALARCONVERTER_HPP
-#define SCALARCONVERTER_HPP
+#ifndef RPN_HPP
+#define RPN_HPP
 
 #include <iostream>
-#include <string>
-#include <iomanip>
+#include <stack>
+#include <cctype>
 #include <cstdlib>
-#include <limits>
+
+#define RED    "\033[0;31m"
+#define GREEN  "\033[0;32m"
+#define YELLOW "\033[33m"
+#define RESET  "\033[0m"
+
 typedef std::string str;
 
-class ScalarConverter
-{
-    private:
-    ScalarConverter();
-ScalarConverter(const ScalarConverter &original);
-~ScalarConverter();
-public:
-
-    static void convert(str s);
+enum Error {
+    BAD_ARG,
+    BAD_EXPRESS,
+    FAIL_COMPUTE,
 };
 
+bool err_msg(Error code);
+bool isOperator(char c);
+
 #endif
+

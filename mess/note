@@ -1,0 +1,1 @@
+ARG=$(cat number.txt); ./a.out $ARG > result.txt

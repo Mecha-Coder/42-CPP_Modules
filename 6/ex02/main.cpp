@@ -37,19 +37,19 @@ void identify(Base &p)
         A a = dynamic_cast<A &>(p);
         std::cout << "2) What type = A\n";
         return ;
-    } catch(...){}
+    } catch(...){std::cout << "Failed A\n";}
 
     try {
         B b = dynamic_cast<B &>(p); 
         std::cout << "2) What type = B\n";
         return ;
-    } catch(...){}
+    } catch(...){std::cout << "Failed B\n";}
 
     try {
         C c = dynamic_cast<C &>(p); 
         std::cout << "2) What type = C\n";
         return ;
-    } catch(...){}
+    } catch(...){std::cout << "Failed C\n";}
 }
 
 int main()
