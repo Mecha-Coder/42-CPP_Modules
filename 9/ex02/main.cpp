@@ -10,90 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// Ford-Johnson Algorithm Breakdown:
-
-/* Chat-GPT
-1) Pair and Sort:
-- Split the input into pairs of elements.
-- Sort each pair (e.g., compare elements in each pair and swap if necessary).
-
-2) Recursive Sorting:
-- Collect the larger element from each sorted pair into a new list.
-- Recursively sort this new list of larger elements using the same algorithm.
-
-3) Insert Smaller Elements:
-- Insert the smaller elements (from the original pairs) into the now-sorted list of larger elements using binary insertion (binary search to find the correct position, minimizing comparisons).
-
-4) Handle Odd Elements:
-- If the input size is odd, the unpaired element is inserted at the end using binary insertion.
-*/
-
-/* DeepSeek
-1. Group Elements into Pairs
-
-- Pair adjacent elements and compare them.
-- Swap within pairs so that the smaller element is first.
-- If the list has an odd length, leave the last element unpaired (called the "leftover").
-
-Example:
-Input: [5, 2, 9, 1, 7, 4, 8, 3, 6, 10, 12, 11, 13]
-Pairs: (2,5), (1,9), (4,7), (3,8), (6,10), (11,12)
-Leftover: 13
-
-2. Extract and Recursively Sort the Larger Elements
-
-- From each pair, take the second (larger) element to form a new list.
-- Recursively sort this new list using the same algorithm.
-
-Example:
-Larger elements: [5, 9, 7, 8, 10, 12]
-Recursively sort [5, 9, 7, 8, 10, 12]
-
-3.  Insert the Smaller Elements
-
-- The smaller elements (from the original pairs) must be inserted into the main chain.
-- Insertion order follows a special sequence to minimize comparisons (based on Jacobsthal numbers).
-- Binary insertion is used to place each element.
-
-Example:
-Smaller elements to insert: [2, 1, 4, 3, 6, 11] (partners of [5,9,7,8,10,12]).
-*/
-
 #include "PmergeMe.hpp"
 
 int main(int ac, char **av)
 {
-    Vector a;
-    List b;
-    Deque c;
-    clock_t start, end;
-    if (!init_and_fill(ac, av, a, b, c)) 
+    Vector a; Deque b;
+   
+    if (!init_and_fill(ac, av, a, b))
         return EXIT_FAILURE;
     
-    std::cout << YELLOW "\nVector container\n================\n" RESET
-              << GREEN "Before :\n" RESET; showNumber(a);
-    start = clock();
-    Ford_John_Sort(a);
-    end = clock();
-    std::cout << RED "\nAfter  : \n" RESET; showNumber(a);
-    process_time(start, end, a.size());
-   
-
-    std::cout << YELLOW "\nList container\n================\n" RESET
-              << GREEN "Before :\n" RESET; showNumber(b); 
-    start = clock();
-    Ford_John_Sort(b);
-    end = clock();
-    std::cout << RED "\nAfter  : \n" RESET; showNumber(b);
-    process_time(start, end, b.size());
-
-    std::cout << YELLOW "\nDeque container\n================\n" RESET
-              << GREEN "Before :\n" RESET; showNumber(c); 
-    start = clock();
-    Ford_John_Sort(c);
-    end = clock();
-    std::cout << RED "\nAfter  : \n" RESET; showNumber(c);
-    process_time(start, end, c.size());
+    COUT << YELLOW "\nDeque container \n================\n" RESET ; run_sorting(b);
+    COUT << YELLOW "\nVector container\n================\n" RESET ; run_sorting(a);
 }
 
 /*Test case
@@ -107,6 +34,7 @@ Single digit
 ./PmergeMe 22
 ./PmergeMe 3 5 9 7 4
 ./PmergeMe `shuf -i 1-100000 -n 3000 | tr "\n" " "`
+./PmergeMe `shuf -i 1-100000 -n 10000 | tr "\n" " "`
 ./PmergeMe `jot -r 3000 1 100000 | tr '\n' ' '`
 
 ./PmergeMe 2 12 4 2 5 8 0 2 3

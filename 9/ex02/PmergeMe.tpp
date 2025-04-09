@@ -12,14 +12,14 @@
 
 #include "PmergeMe.hpp"
 
-template <typename Container1, typename Container2, typename Container3>
-bool init_and_fill(int ac, char **av, Container1 &a, Container2 &b, Container3 &c)
+template <typename C1, typename C2>
+bool init_and_fill(int ac, char **av, C1 &a, C2 &b)
 {
     long num;
 
     if (ac < 2) 
         return err_msg(BAD_ARG);
-    
+        
     for (int i=1; i < ac; i++)
     {
         if (!isNumber(av[i]))
@@ -31,7 +31,6 @@ bool init_and_fill(int ac, char **av, Container1 &a, Container2 &b, Container3 &
         
         a.push_back(static_cast<int>(num));
         b.push_back(static_cast<int>(num));
-        c.push_back(static_cast<int>(num));
     }
     return true;
 }
@@ -39,7 +38,23 @@ bool init_and_fill(int ac, char **av, Container1 &a, Container2 &b, Container3 &
 template <typename Container>
 void showNumber(const Container &a)
 {
-    for (typename Container::const_iterator i = a.begin(); i != a.end(); i++)
-        std::cout << *i << " ";
-    std::cout << "\n";
+    typename Container::const_iterator i = a.begin();
+
+    while (i != a.end())
+        COUT << *i++ << " ";
+    COUT << "\n";
+}
+
+template <typename Container>
+void run_sorting(Container &c)
+{
+    clock_t start, end;
+    COUT << GREEN "Before :\n" RESET; showNumber(c);
+    
+    start = clock();
+    Ford_John_Sort(c);
+    end = clock();
+    
+    COUT << RED "\nAfter  : \n" RESET; showNumber(c);
+    process_time(start, end, c.size());
 }

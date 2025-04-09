@@ -28,7 +28,7 @@ int compute(int a, int b, char c)
 
 int main(int ac, char **av)
 {
-    int a, b, result;
+    int a, b;
     std::stack<int> Stack;
     
     if (ac != 2) return err_msg(BAD_ARG);
@@ -58,14 +58,9 @@ int main(int ac, char **av)
     }
 
     // Validate final result
-    if (Stack.empty())
+    if (Stack.size() != 1)
         return err_msg(BAD_EXPRESS);
-    
-    result = Stack.top(); Stack.pop();
-    if (Stack.size())
-        return err_msg(FAIL_COMPUTE);
-
-    std::cout << result << "\n";
+    std::cout << Stack.top() << "\n";
 }
 
 /*
@@ -76,7 +71,7 @@ OK
 ./RPN "2 3 +"               // Output: 5
 ./RPN "23+"                 // Output: 5
 ./RPN "0 3 /"               // Output: 0
-./RPN "3 4 2 * 15 - / +"    // Output:   ~ 3 + 4 x 2 / (1 - 5) = 1
+./RPN "3 4 2 * 1 5 - / +"    // Output:   ~ 3 + 4 x 2 / (1 - 5) = 1
 ./RPN "8 9 * 9 - 9 - 9 - 4 - 1 +" // Output: 42
 ./RPN "7 7 * 7 -"            // Output: 42
 ./RPN "1 2 * 2 / 2 * 2 4 - +" // Output: 0

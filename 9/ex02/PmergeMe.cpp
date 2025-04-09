@@ -14,21 +14,22 @@
 
 bool err_msg(Error code)
 {
-    std::cerr << RED "Error: " RESET;
+    CERR << RED "Error: " RESET;
     switch (code) 
     {
-        case BAD_ARG: std::cerr << "Invalid argument. Expected => ./PmergeMe 3 5 9 7 4\n"; break;
-        case NOT_NUM: std::cerr << "Invalid number found\n"; break;
-        case NUM_OUT_RNG: std::cerr << "Number out of range (0 - INT_MAX)\n"; break;
+        case BAD_ARG: CERR << "Invalid argument. Expected => ./PmergeMe 3 5 9 7 4\n"; break;
+        case NOT_NUM: CERR << "Invalid number found\n"; break;
+        case NUM_OUT_RNG: CERR << "Number out of range (0 - INT_MAX)\n"; break;
     }
     return false;
 }
 
 void process_time(clock_t start, clock_t end, size_t size)
 {
-    double time =static_cast<double>(end - start) / CLOCKS_PER_SEC * 1e6;
-    std::cout << "\nSorting time for " << size << " elements is = " 
-              << time << " us\n";
+    double time;
+    
+    time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1e6;
+    COUT << "\nSorting time for " << size << " elements is = " << time << " µs\n";
 }
 
 bool isNumber(const char *s)
@@ -48,190 +49,238 @@ bool isNumber(const char *s)
     return true;
 }
 
-void Ford_John_Sort(Deque &deq)
+void getInsertSeq(Vector &seq, int len)
 {
-    Deque::iterator a = deq.begin();
-    Deque::iterator b = deq.begin();
-    b++;
+    int a = 1, b = 1, now;
 
-    if (deq.size() == 1) return;
-    if (deq.size() == 2) 
+    if (len < 2) return seq.push_back(0);
+
+    seq.push_back(1);
+    seq.push_back(0);
+
+    while (b <= len)
     {
-        if (*a > *b)
+        now = b + 2 * a;
+        for (int j = now; j > b; j--)
         {
-            int temp = *a;
-            *a = *b;
-            *b = temp;
+            if (j < len)
+                seq.push_back(j);
         }
-        return;
-    }
-
-    Deque large;
-    Deque small;
-    bool extra = false;
-
-    while(true)
-    {
-        if (*a > *b) {large.push_back(*a); small.push_back(*b);}
-        else         {large.push_back(*b); small.push_back(*a);}
-
-        if (++a, ++b == deq.end()) break;
-        if (++a, ++b == deq.end()) {extra = true; break;}
-    }
-
-    Ford_John_Sort(large);
-    Ford_John_Sort(small);
-
-    if (extra)
-    {
-        if (*a > large.front() && *a > small.back())
-            large.push_back(*a);
-        else 
-            small.push_back(*a);
-    }
-
-    Deque::iterator lastcopy = std::copy(small.begin(), small.end(), deq.begin());
-    std::copy(large.begin(), large.end(), lastcopy);
-    
-    Deque::iterator current = deq.begin();
-    while (++current != deq.end())
-    {
-        int value = *current;
-        a = current;
-        b = current;
-
-        while (a != deq.begin() && *(--a) > value)
-            *(b--) = *a;
-        
-        if (value >= *a) *b = value;
-        else             *a = value;
+        a = b;
+        b = now;
     }
 }
 
-void Ford_John_Sort(List &list)
+//=================================================================================
+
+void v_pairSort(Vector &main, VecPair &pair, int &unpair)
 {
-    List::iterator a = list.begin();
-    List::iterator b = list.begin();
-    b++;
+    Vector::iterator i, a, b;
 
-    if (list.size() == 1) return;
-    if (list.size() == 2) 
+    if (main.size() % 2)
     {
-        if (*a > *b)
-        {
-            int temp = *a;
-            *a = *b;
-            *b = temp;
-        }
-        return;
+        unpair = main.back();
+        main.pop_back();
     }
-
-    List large;
-    List small;
-    bool extra = false;
-
-    while(true)
+    for (i = main.begin(); i != main.end();)
     {
-        if (*a > *b) {large.push_back(*a); small.push_back(*b);}
-        else         {large.push_back(*b); small.push_back(*a);}
-
-        if (++a, ++b == list.end()) break;
-        if (++a, ++b == list.end()) {extra = true; break;}
-    }
-
-    Ford_John_Sort(large);
-    Ford_John_Sort(small);
-
-    if (extra)
-    {
-        if (*a > large.front() && *a > small.back())
-            large.push_back(*a);
-        else 
-            small.push_back(*a);
-    }
-
-    List::iterator lastcopy = std::copy(small.begin(), small.end(), list.begin());
-    std::copy(large.begin(), large.end(), lastcopy);
-    
-    List::iterator current = list.begin();
-    while (++current != list.end())
-    {
-        int value = *current;
-        a = current;
-        b = current;
-
-        while (a != list.begin() && *(--a) > value)
-            *(b--) = *a;
+        a = i++; 
+        b = i++;
         
-        if (value >= *a) *b = value;
-        else             *a = value;
+        if (*a > *b) pair.push_back(std::make_pair(*a, *b));
+        else         pair.push_back(std::make_pair(*b, *a));
     }
 }
 
-void Ford_John_Sort(Vector &vector)
+void v_mergeSortPair(VecPair &pair)
 {
-    Vector::iterator a = vector.begin();
-    Vector::iterator b = vector.begin();
-    b++;
+    if (pair.size() <= 1) return;
 
-    // If 1 number, no need to sort
-    // If 2 numbers, swap them if not sorted
-    if (vector.size() == 1) return;
-    if (vector.size() == 2) 
+    VecPair::iterator mid, l, r;
+    mid = pair.begin() +  pair.size() / 2;
+
+    VecPair left(pair.begin(), mid);
+    VecPair right(mid, pair.end());
+
+    v_mergeSortPair(left);
+    v_mergeSortPair(right);
+
+    pair.clear();
+    l = left.begin();
+    r = right.begin();
+
+    while (l != left.end() && r != right.end())
     {
-        if (*a > *b)
-        {
-            int temp = *a;
-            *a = *b;
-            *b = temp;
-        }
-        return;
+        if (l->first < r->first) pair.push_back(*l++);
+        else                     pair.push_back(*r++);
     }
+    pair.insert(pair.end(), l, left.end());
+    pair.insert(pair.end(), r, right.end());
+}
 
-    Vector large;
-    Vector small;
-    bool extra = false;
+void v_splitPair(Vector &main, Vector &insert, VecPair &pair)
+{
+    VecPair::iterator i = pair.begin();
 
-    // Compare pairs and group them into large and small container
-    // At the last loop, determine with got extra, put it aside
-    while(true)
+    main.clear();
+    while (i != pair.end())
     {
-        if (*a > *b) {large.push_back(*a); small.push_back(*b);}
-        else         {large.push_back(*b); small.push_back(*a);}
-
-        if (++a, ++b == vector.end()) break;
-        if (++a, ++b == vector.end()) {extra = true; break;}
+        main.push_back(i->first);
+        insert.push_back(i->second);
+        i++;
     }
+}
 
-    // Recursively do the above until left 1 or 2 numbers
-    Ford_John_Sort(large);
-    Ford_John_Sort(small);
-
-    // If got extra where to put it, large or small container
-    if (extra)
-    {
-        if (*a > large.front() && *a > small.back())
-            large.push_back(*a);
-        else 
-            small.push_back(*a);
-    }
-
-    // Merge the numbers back
-    Vector::iterator lastcopy = std::copy(small.begin(), small.end(), vector.begin());
-    std::copy(large.begin(), large.end(), lastcopy);
+typename Vector::iterator v_binarySearch(Vector &main, int target)
+{
+    typename Vector::iterator  mid, begin, end;
+    begin = main.begin();
+    end = main.end();
     
-    // Perform normal insertion sort (speed same as binary insertion sort)
-    Vector::iterator current = vector.begin();
-    while (++current != vector.end())
+    while (begin < end)
     {
-        int value = *current;
-        a = current;
-        b = current;
-
-        while (a != vector.begin() && *(--a) > value)
-            *(b--) = *a;
+        mid = begin + (end - begin) / 2;
         
-        if (value >= *a) *b = value;
-        else             *a = value;
+        if (*mid < target)  begin = ++mid;
+        else                end = mid;
     }
+    return mid;
+}
+
+void v_binaryInsertionSort(Vector &main, Vector &insert, Vector &seq, int &unpair)
+{
+    Vector::iterator it_main;
+
+    for (Vector::iterator it_seq = seq.begin() ; it_seq != seq.end(); it_seq++)
+    {
+        it_main = v_binarySearch(main, insert[*it_seq]);
+        main.insert(it_main, insert[*it_seq]);
+    }
+    if (unpair >= 0)
+    {
+        it_main = v_binarySearch(main, unpair);
+        main.insert(it_main,  unpair);
+    }
+}
+
+void Ford_John_Sort(Vector &main)
+{
+    int unpair = -1;
+    Vector insert;
+    VecPair pair;
+    Vector seq;
+
+    if (main.size() < 2) return ;
+    v_pairSort(main, pair, unpair); 
+    v_mergeSortPair(pair);
+    v_splitPair(main, insert, pair);
+    getInsertSeq(seq, static_cast<int>(insert.size()));
+    v_binaryInsertionSort(main, insert, seq, unpair);
+}
+
+//=================================================================================
+
+void q_pairSort(Deque &main, DeqPair &pair, int &unpair)
+{
+    Deque::iterator i, a, b;
+
+    if (main.size() % 2)
+    {
+        unpair = main.back();
+        main.pop_back();
+    }
+    for (i = main.begin(); i != main.end();)
+    {
+        a = i++; 
+        b = i++;
+        
+        if (*a > *b) pair.push_back(std::make_pair(*a, *b));
+        else         pair.push_back(std::make_pair(*b, *a));
+    }
+}
+
+void q_mergeSortPair(DeqPair &pair)
+{
+    if (pair.size() <= 1) return;
+
+    DeqPair::iterator mid, l, r;
+    mid = pair.begin() +  pair.size() / 2;
+
+    DeqPair left(pair.begin(), mid);
+    DeqPair right(mid, pair.end());
+
+    q_mergeSortPair(left);
+    q_mergeSortPair(right);
+
+    pair.clear();
+    l = left.begin();
+    r = right.begin();
+
+    while (l != left.end() && r != right.end())
+    {
+        if (l->first < r->first) pair.push_back(*l++);
+        else                     pair.push_back(*r++);
+    }
+    pair.insert(pair.end(), l, left.end());
+    pair.insert(pair.end(), r, right.end());
+}
+
+void q_splitPair(Deque &main, Deque &insert, DeqPair &pair)
+{
+    DeqPair::iterator i = pair.begin();
+
+    main.clear();
+    while (i != pair.end())
+    {
+        main.push_back(i->first);
+        insert.push_back(i->second);
+        i++;
+    }
+}
+
+typename Deque::iterator q_binarySearch(Deque &main, int target)
+{
+    typename Deque::iterator  mid, begin, end;
+    begin = main.begin();
+    end = main.end();
+    
+    while (begin < end)
+    {
+        mid = begin + (end - begin) / 2;
+        
+        if (*mid < target)  begin = ++mid;
+        else                end = mid;
+    }
+    return mid;
+}
+
+void q_binaryInsertionSort(Deque &main, Deque &insert, Vector &seq, int &unpair)
+{
+    Deque::iterator it_main;
+
+    for (Vector::iterator it_seq = seq.begin() ; it_seq != seq.end(); it_seq++)
+    {
+        it_main = q_binarySearch(main, insert[*it_seq]);
+        main.insert(it_main, insert[*it_seq]);
+    }
+    if (unpair >= 0)
+    {
+        it_main = q_binarySearch(main, unpair);
+        main.insert(it_main,  unpair);
+    }
+}
+
+void Ford_John_Sort(Deque &main)
+{
+    int unpair = -1;
+    Deque insert;
+    DeqPair pair;
+    Vector seq;
+
+    if (main.size() < 2) return ;
+    q_pairSort(main, pair, unpair); 
+    q_mergeSortPair(pair);
+    q_splitPair(main, insert, pair);
+    getInsertSeq(seq, static_cast<int>(insert.size()));
+    q_binaryInsertionSort(main, insert, seq, unpair);
 }

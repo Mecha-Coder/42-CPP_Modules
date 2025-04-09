@@ -28,10 +28,14 @@
 #define YELLOW "\033[33m"
 #define RESET  "\033[0m"
 
-typedef std::string str;
+#define COUT std::cout 
+#define CERR std::cerr
+
 typedef std::vector<int> Vector;
-typedef std::list<int> List;
 typedef std::deque<int> Deque;
+
+typedef std::vector<std::pair<int, int> > VecPair;
+typedef std::vector<std::pair<int, int> > DeqPair;
 
 enum Error {
     BAD_ARG,
@@ -41,16 +45,18 @@ enum Error {
 
 bool err_msg(Error code);
 bool isNumber(const char *s);
-void Ford_John_Sort(List &list);
-void Ford_John_Sort(Vector &vector);
-void Ford_John_Sort(Deque &deq);
+void Ford_John_Sort(Deque &main);
+void Ford_John_Sort(Vector &main);
 void process_time(clock_t start, clock_t end, size_t size);
-
-template <typename Container1, typename Container2, typename Container3>
-bool init_and_fill(int ac, char **av, Container1 &a, Container2 &b, Container3 &c);
 
 template <typename Container>
 void showNumber(const Container &a);
+
+template <typename C1, typename C2>
+bool init_and_fill(int ac, char **av, C1 &a, C2 &b);
+
+template <typename Container>
+void run_sorting(Container &c);
 
 #include "PmergeMe.tpp"
 
